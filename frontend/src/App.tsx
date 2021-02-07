@@ -44,7 +44,9 @@ function App() {
                                 </Clink>
                             </li>
                             <li>
-                                <Link to="/main">Main</Link>
+                                <Clink>
+                                    <Link to="/main">Main</Link>
+                                </Clink>
                             </li>
                         </Flex>
                     </ul>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { register } from "../api/register";
-import { Redirect, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {
     Input,
     InputGroup,
@@ -10,7 +10,6 @@ import {
     VStack,
     useToast,
 } from "@chakra-ui/react";
-import { Route } from "workbox-routing";
 
 function Register() {
     const [show, setShow] = useState(false);

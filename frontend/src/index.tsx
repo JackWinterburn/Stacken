@@ -4,6 +4,7 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
+import { CookiesProvider } from "react-cookie";
 import { createStore } from "redux";
 import allReducers from "./reducers/reducers";
 import { Provider } from "react-redux";
@@ -12,21 +13,17 @@ const store = createStore(allReducers);
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <ChakraProvider>
-                <App />
-            </ChakraProvider>
-        </Provider>
+        <CookiesProvider>
+            <Provider store={store}>
+                <ChakraProvider>
+                    <App />
+                </ChakraProvider>
+            </Provider>
+        </CookiesProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.unregister();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
