@@ -27,20 +27,21 @@ function Register() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    register(username, email, password).then((successful) => {
-                        if (successful) {
-                            setRedirect(true);
-                        } else {
-                            return toast({
-                                title: "Oops...",
-                                description:
-                                    "There was a problem when creating your account.",
-                                status: "error",
-                                duration: 40000,
-                                isClosable: true,
-                            });
+                    register(username, email, password).then(
+                        ([successful, errmsg]) => {
+                            if (successful) {
+                                setRedirect(true);
+                            } else {
+                                return toast({
+                                    title: "Oops...",
+                                    description: errmsg,
+                                    status: "error",
+                                    duration: 5000,
+                                    isClosable: true,
+                                });
+                            }
                         }
-                    });
+                    );
                 }}
             >
                 <VStack m="1rem auto 1rem auto">

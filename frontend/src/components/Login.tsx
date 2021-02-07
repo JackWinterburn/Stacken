@@ -18,16 +18,17 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [_, setCookie] = useCookies(["authToken"]);
+    const toast = useToast();
 
     return redirect ? (
         <Redirect to="/main" />
     ) : (
         <div style={{ width: "60%", margin: "auto" }}>
-            <h1>Login</h1>
+            <Heading>Login</Heading>
             <form
                 onSubmit={async (e) => {
                     e.preventDefault();
-                    const { successful, tkkey, value } = await login(
+                    const { successful, errmsg, value } = await login(
                         email,
                         password
                     );
@@ -41,6 +42,14 @@ function Login() {
                         });
 
                         setRedirect(true);
+                    } else {
+                        return toast({
+                            title: "Oops...",
+                            description: errmsg,
+                            status: "error",
+                            duration: 5000,
+                            isClosable: true,
+                        });
                     }
                 }}
             >

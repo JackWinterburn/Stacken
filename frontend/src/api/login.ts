@@ -16,10 +16,9 @@ export const login = async (email: string, password: string) => {
 
     let res = await axios(options);
     let value = res.data.token;
-    let key = "authToken";
 
-    // Detail is only included in error messages
-    if (res.data.Detail) {
-        return { successful: false, tkkey: "", value: "" };
-    } else return { successful: true, tkkey: key, value };
+    console.log(res.data);
+    if (!res.data.status) {
+        return { successful: false, errmsg: res.data.message, value: "" };
+    } else return { successful: true, errmsg: "", value };
 };

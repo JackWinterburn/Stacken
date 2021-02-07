@@ -1,4 +1,3 @@
-import React from "react";
 import { useCookies } from "react-cookie";
 import { Link as Clink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";

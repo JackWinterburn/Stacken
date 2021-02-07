@@ -20,8 +20,8 @@ export const register = async (
 
     let res = await axios(options);
 
-    // Detail is only included in error messages
-    if (res.data.Detail) {
-        return false;
-    } else return true;
+    // Code 23505 is for duplicate emails
+    if (res.data.Severity === "ERROR" && res.data.Code === "23505") {
+        return [false, "That email already exists"];
+    } else return [true, ""];
 };
