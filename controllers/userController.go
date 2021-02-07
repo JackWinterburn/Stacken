@@ -37,8 +37,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 /*---------------------------------------------------------------------------------------
- * FindOne function: used to try and find the account that the user in trying to login to
- * and returns a JWT back the the user if successfull
+ * FindOne function: used to try and find the account that the user is trying to login to
+ * and returns a JWT back to the user if successfull
  *-------------------------------------------------------------------------------------*/
 func FindOne(email, password string) map[string]interface{} {
 	user := &models.User{}
@@ -104,6 +104,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	err = createdUser.Error
 	if err != nil {
 		fmt.Println(err)
+		json.NewEncoder(w).Encode(err)
 		return
 	}
 

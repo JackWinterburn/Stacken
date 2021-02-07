@@ -1,15 +1,17 @@
 package routes
 
 import (
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/JackWinterburn/stacken/controllers"
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func Handlers() *mux.Router {
-	r := mux.NewRouter().StrictSlash(true)
-	r.Use(CommonMiddleware)
+	r := mux.NewRouter()
 
 	// User Routes
 	r.HandleFunc("/register", controllers.CreateUser).Methods("POST")
@@ -35,6 +37,15 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/get/card/{id}", controllers.GetCard).Methods("GET")
 	r.HandleFunc("/delete/card/{id}", controllers.DeleteCard).Methods("DELETE")
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowCredentials: true,
+	})
+
+	handler := c.Handler(r)
+
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, handler))
 	return r
 }
 
@@ -42,7 +53,8 @@ func Handlers() *mux.Router {
 func CommonMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Request-Headers, Access-Control-Request-Method, Connection, Host, Origin, User-Agent, Referer, Cache-Control, X-header")
 		next.ServeHTTP(w, r)
