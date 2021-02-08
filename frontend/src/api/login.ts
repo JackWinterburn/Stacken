@@ -20,5 +20,5 @@ export const login = async (email: string, password: string) => {
     console.log(res.data);
     if (!res.data.status) {
         return { successful: false, errmsg: res.data.message, value: "" };
-    } else return { successful: true, errmsg: "", value };
+    } else return { successful: true, errmsg: res.data.user.ID, value };
 };

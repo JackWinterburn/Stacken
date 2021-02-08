@@ -7,10 +7,18 @@ import Home from "./components/Home";
 import Main from "./components/Main";
 import Register from "./components/Register";
 import Logout from "./components/Logout";
+import { signin, signout } from "./actions/actions";
+import { useCookies } from "react-cookie";
 
 function App() {
-    // const counter = useSelector((state: RootStateOrAny) => state.counter);
     const dispatch = useDispatch();
+    const [cookie] = useCookies();
+
+    if (cookie.authToken) {
+        dispatch(signin());
+    } else {
+        dispatch(signout());
+    }
 
     return (
         <Router>

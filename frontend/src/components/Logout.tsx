@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Link as Clink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { signout } from "../actions/actions";
+import { useDispatch } from "react-redux";
 
 function Logout() {
+    const dispatch = useDispatch();
     const [, , removeCookie] = useCookies(["authToken"]);
-    removeCookie("authToken");
+
+    useEffect(() => {
+        removeCookie("authToken");
+        removeCookie("UUID");
+        dispatch(signout());
+    }, []);
+
     return (
         <div>
             <h1>Logout Page</h1>

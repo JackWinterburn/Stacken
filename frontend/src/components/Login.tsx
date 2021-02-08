@@ -10,6 +10,8 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Redirect } from "react-router";
+import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { signin } from "../actions/actions";
 import { useCookies } from "react-cookie";
 
 function Login() {
@@ -19,6 +21,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const [_, setCookie] = useCookies(["authToken"]);
     const toast = useToast();
+    const dispatch = useDispatch();
 
     return redirect ? (
         <Redirect to="/main" />
@@ -40,6 +43,12 @@ function Login() {
                             path: "/",
                             expires: d,
                         });
+                        setCookie("UUID", errmsg, {
+                            path: "/",
+                            expires: d,
+                        });
+
+                        dispatch(signin());
 
                         setRedirect(true);
                     } else {

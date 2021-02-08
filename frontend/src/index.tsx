@@ -5,11 +5,12 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CookiesProvider } from "react-cookie";
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 import allReducers from "./reducers/reducers";
 import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const store = createStore(allReducers);
+const store = createStore(allReducers, composeWithDevTools());
 
 ReactDOM.render(
     <React.StrictMode>
