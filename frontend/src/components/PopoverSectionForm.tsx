@@ -32,7 +32,6 @@ export function PopoverSectionForm() {
     });
 
     const handleFormSubmit = async (id: number) => {
-        console.log(id);
         const options: AxiosRequestConfig = {
             url: "http://localhost:8080/create/section",
             method: "POST",
@@ -49,6 +48,7 @@ export function PopoverSectionForm() {
         let res = await axios(options);
         let sectionsToDispatch = sections.concat([res.data.Value]);
         dispatch(alterSections(sectionsToDispatch));
+        setSectionTitle("");
     };
     return (
         <Popover
@@ -61,6 +61,7 @@ export function PopoverSectionForm() {
         >
             <PopoverTrigger>
                 <IconButton
+                    mt="3rem"
                     size="md"
                     aria-label="Add Section"
                     icon={<AddIcon />}

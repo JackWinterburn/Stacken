@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
-import { Heading, VStack, Divider, Button } from "@chakra-ui/react";
+import {
+    Heading,
+    VStack,
+    HStack,
+    Divider,
+    Button,
+    Box,
+    Text,
+} from "@chakra-ui/react";
 import { PopoverSectionForm } from "./PopoverSectionForm";
+import { ContextMenuItems } from "./ContextMenuItems";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import axios, { AxiosRequestConfig } from "axios";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import { alterSections } from "../actions/actions";
@@ -39,19 +49,34 @@ function Main() {
     };
 
     const putSectionsByUser = () => {
-        console.log(sections);
-
         const sectionsElt = sections.map((section: any, key: number) => (
-            <VStack key={key}>
-                <Button
-                    minWidth="15rem"
-                    m="0.5rem 1rem"
-                    colorScheme="blue"
+            <Box key={key}>
+                <ContextMenuTrigger id={section.ID}>
+                    <Button
+                        minWidth="15rem"
+                        m="0.5rem 1rem"
+                        colorScheme="blue"
+                        id={section.ID}
+                    >
+                        {section.Title}
+                    </Button>
+                </ContextMenuTrigger>
+
+                <ContextMenu
                     id={section.ID}
+                    style={{
+                        opacity: "100%",
+                        backgroundColor: "whitesmoke",
+                        padding: "3px",
+                        boxShadow: "3px 3px 20px rgba(79, 79, 79, 0.4)",
+                        borderRadius: "5px",
+                        border: "1px solid #3182ce",
+                        zIndex: 1,
+                    }}
                 >
-                    {section.Title}
-                </Button>
-            </VStack>
+                    <ContextMenuItems />
+                </ContextMenu>
+            </Box>
         ));
         return sectionsElt;
     };
@@ -62,9 +87,11 @@ function Main() {
         <>
             <div style={{ margin: "auto", width: "60%", textAlign: "center" }}>
                 <Heading>Sections</Heading>
-                <Divider orientation="horizontal" />
 
-                {putSectionsByUser()}
+                <Divider orientation="horizontal" />
+                <VStack border="1px solid #eee" borderRadius="5px">
+                    {putSectionsByUser()}
+                </VStack>
             </div>
             <div style={{ margin: "auto", width: "60%", textAlign: "right" }}>
                 <PopoverSectionForm />
