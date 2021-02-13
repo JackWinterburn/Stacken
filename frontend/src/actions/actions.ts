@@ -15,3 +15,12 @@ export const signout = (): { type: string } => {
         type: "SIGN_OUT",
     };
 };
+
+export const alterSections = (
+    sections: any[]
+): { type: string; sections: any[] } => {
+    return {
+        type: "ALTER_SECTIONS",
+        sections,
+    };
+};

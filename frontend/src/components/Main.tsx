@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { Heading, VStack, Divider, Button } from "@chakra-ui/react";
+import { PopoverSectionForm } from "./PopoverSectionForm";
 import axios, { AxiosRequestConfig } from "axios";
-import { Section } from "../types";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { alterSections } from "../actions/actions";
 import { Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 function Main() {
     const isLoggedIn = useSelector((state: RootStateOrAny) => state.isLoggedIn);
+    const sections: any[] = useSelector(
+        (state: RootStateOrAny) => state.sections
+    );
+    const dispatch = useDispatch();
     const [redirect, setRedirect] = useState(false);
     const [cookie] = useCookies(["UUID"]);
-    let sections: any[] = [];
-
-    const [sectionState, setSectionState] = useState<any>([]);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -33,18 +35,23 @@ function Main() {
         };
 
         let res = await axios(options);
-        setSectionState((prevState: any) => (prevState = res.data.Sections));
+        dispatch(alterSections(res.data.Sections));
     };
 
     const putSectionsByUser = () => {
-        if (sectionState === [] || sectionState === undefined) {
-            return;
-        }
+        console.log(sections);
 
-        const sectionsElt = sectionState.map((section: any, key: number) => (
-            <Button colorScheme="blue" key={key}>
-                {section.Title}
-            </Button>
+        const sectionsElt = sections.map((section: any, key: number) => (
+            <VStack key={key}>
+                <Button
+                    minWidth="15rem"
+                    m="0.5rem 1rem"
+                    colorScheme="blue"
+                    id={section.ID}
+                >
+                    {section.Title}
+                </Button>
+            </VStack>
         ));
         return sectionsElt;
     };
@@ -52,14 +59,17 @@ function Main() {
     return redirect ? (
         <Redirect to="login" />
     ) : (
-        <div>
-            <Heading>Main Page</Heading>
-            <Divider orientation="horizontal" />
+        <>
+            <div style={{ margin: "auto", width: "60%", textAlign: "center" }}>
+                <Heading>Sections</Heading>
+                <Divider orientation="horizontal" />
 
-            {console.log(sectionState)}
-
-            {putSectionsByUser()}
-        </div>
+                {putSectionsByUser()}
+            </div>
+            <div style={{ margin: "auto", width: "60%", textAlign: "right" }}>
+                <PopoverSectionForm />
+            </div>
+        </>
     );
 }
 

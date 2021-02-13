@@ -27,7 +27,11 @@ func GetSection(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
 	var section models.Section
-	database.First(&section, params["id"])
+	var decks []models.Deck
+
+	database.First(&section, params["id"]).Related(&decks)
+
+	section.Decks = decks
 
 	json.NewEncoder(w).Encode(section)
 }
