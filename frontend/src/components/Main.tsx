@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import {
     Heading,
     VStack,
-    HStack,
     Divider,
     Button,
     Box,
-    Text,
+    useColorMode,
 } from "@chakra-ui/react";
 import { PopoverSectionForm } from "./PopoverSectionForm";
 import { ContextMenuItems } from "./ContextMenuItems";
@@ -25,6 +24,7 @@ function Main() {
     const dispatch = useDispatch();
     const [redirect, setRedirect] = useState(false);
     const [cookie] = useCookies(["UUID"]);
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -49,6 +49,8 @@ function Main() {
     };
 
     const putSectionsByUser = () => {
+        let bgcolor = "";
+        colorMode === "dark" ? (bgcolor = "#1A202C") : (bgcolor = "whitesmoke");
         const sectionsElt = sections.map((section: any, key: number) => (
             <Box key={key}>
                 <ContextMenuTrigger id={section.ID}>
@@ -66,7 +68,7 @@ function Main() {
                     id={section.ID}
                     style={{
                         opacity: "100%",
-                        backgroundColor: "whitesmoke",
+                        backgroundColor: bgcolor,
                         padding: "3px",
                         boxShadow: "3px 3px 20px rgba(79, 79, 79, 0.4)",
                         borderRadius: "5px",
