@@ -23,7 +23,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/create/section", controllers.CreateSection).Methods("POST")
 	r.HandleFunc("/get/sections/{id}", controllers.GetSections).Methods("GET")
 	r.HandleFunc("/get/section/{id}", controllers.GetSection).Methods("GET")
-	r.HandleFunc("/delete/section/{id}", controllers.DeleteSection).Methods("DELETE")
+	r.HandleFunc("/delete/section/{id}", controllers.DeleteSection).Methods("POST")
 
 	// Deck Routes
 	r.HandleFunc("/create/deck", controllers.CreateDeck).Methods("POST")
@@ -35,10 +35,10 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/create/card", controllers.CreateCard).Methods("POST")
 	r.HandleFunc("/get/cards/{id}", controllers.GetCards).Methods("GET")
 	r.HandleFunc("/get/card/{id}", controllers.GetCard).Methods("GET")
-	r.HandleFunc("/delete/card/{id}", controllers.DeleteCard).Methods("DELETE")
+	r.HandleFunc("/delete/card/{id}", controllers.DeleteCard).Methods("POST")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
+		AllowedOrigins:   []string{"http://localhost:3000"},
 		AllowCredentials: true,
 	})
 

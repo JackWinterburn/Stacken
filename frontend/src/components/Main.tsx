@@ -74,7 +74,7 @@ function Main() {
                         zIndex: 1,
                     }}
                 >
-                    <ContextMenuItems />
+                    <ContextMenuItems id={section.ID} />
                 </ContextMenu>
             </Box>
         ));
