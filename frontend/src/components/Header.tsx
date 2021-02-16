@@ -6,6 +6,7 @@ import Main from "./Main";
 import Register from "./Register";
 import Logout from "./Logout";
 import DarkModeSwitch from "./DarkModeSwitch";
+import DecksView from "./DecksView";
 
 export default function Header() {
     return (
@@ -13,8 +14,6 @@ export default function Header() {
             <div className="app">
                 <nav
                     style={{
-                        borderBottom: "1px solid #eee",
-                        marginBottom: "3rem",
                         width: "100%",
                         padding: "1rem",
                     }}
@@ -56,6 +55,11 @@ export default function Header() {
                         <DarkModeSwitch />
                     </Flex>
                 </nav>
+                <hr
+                    style={{
+                        marginBottom: "2rem",
+                    }}
+                />
             </div>
 
             <Switch>
@@ -71,8 +75,11 @@ export default function Header() {
                 <Route path="/register">
                     <Register />
                 </Route>
-                <Route path="/main">
+                <Route exact path="/main">
                     <Main />
+                </Route>
+                <Route path="/main/:id">
+                    <DecksView />
                 </Route>
             </Switch>
         </Router>

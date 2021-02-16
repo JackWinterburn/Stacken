@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, Dispatch } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import {
     useDisclosure,
@@ -79,7 +79,7 @@ export function PopoverSectionForm() {
                     <InputGroup>
                         <Input
                             ref={firstFieldRef}
-                            placeholder="Section Title"
+                            placeholder="New Section Title"
                             value={sectionTitle}
                             onChange={(e) => setSectionTitle(e.target.value)}
                         />

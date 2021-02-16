@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../api/login";
 import {
     Input,
@@ -22,6 +22,13 @@ function Login() {
     const [_, setCookie] = useCookies(["authToken"]);
     const toast = useToast();
     const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state: RootStateOrAny) => state.isLoggedIn);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            setRedirect(true);
+        }
+    }, []);
 
     return redirect ? (
         <Redirect to="/main" />
