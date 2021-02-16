@@ -76,7 +76,7 @@ function Main() {
                             zIndex: 1,
                         }}
                     >
-                        <ContextMenuItems id={section.ID} />
+                        <ContextMenuItems id={section.ID} entity="section" />
                     </ContextMenu>
                 </Box>
             </Link>
@@ -89,7 +89,7 @@ function Main() {
     ) : (
         <>
             <div style={{ margin: "auto", width: "60%", textAlign: "center" }}>
-                <Heading>Sections</Heading>
+                <Heading>✂ Sections</Heading>
 
                 <Divider orientation="horizontal" />
                 <VStack>{putSectionsByUser()}</VStack>

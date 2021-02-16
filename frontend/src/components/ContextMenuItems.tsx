@@ -3,14 +3,18 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { HStack, Divider, Text, useColorMode } from "@chakra-ui/react";
 import { MenuItem } from "react-contextmenu";
 import { deleteEntity } from "../api/deleteEntity";
-import { alterSections } from "../actions/actions";
+import { alterSections, alterDecks } from "../actions/actions";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 
-export function ContextMenuItems({ id }: { id: number }) {
+export function ContextMenuItems({
+    id,
+    entity,
+}: {
+    id: number;
+    entity: string;
+}) {
     const { colorMode } = useColorMode();
-    let sections: any[] = useSelector(
-        (state: RootStateOrAny) => state.sections
-    );
+    let currentEntity: any = useSelector((state: RootStateOrAny) => state);
     const dispatch = useDispatch();
 
     let bgcolor = "";
@@ -24,11 +28,23 @@ export function ContextMenuItems({ id }: { id: number }) {
     }
 
     const handleClick = (id: number, type: string) => {
+        let action: any;
+        switch (entity) {
+            case "section":
+                currentEntity = currentEntity.sections;
+                action = alterSections;
+                break;
+            case "deck":
+                currentEntity = currentEntity.decks;
+                action = alterDecks;
+                break;
+        }
+
         if (type === "delete") {
-            deleteEntity(id, "section");
+            deleteEntity(id, entity);
 
             let ds: any;
-            for (let i of sections) {
+            for (let i of currentEntity) {
                 if (i.ID === id) {
                     ds = i;
                 } else {
@@ -36,8 +52,8 @@ export function ContextMenuItems({ id }: { id: number }) {
                 }
             }
 
-            sections = sections.filter((s) => s !== ds);
-            dispatch(alterSections(sections));
+            currentEntity = currentEntity.filter((s: any) => s !== ds);
+            dispatch(action(currentEntity));
         }
     };
 

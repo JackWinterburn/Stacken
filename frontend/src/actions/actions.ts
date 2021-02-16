@@ -1,9 +1,3 @@
-export const increment = (): { type: string } => {
-    return {
-        type: "INCREMENT",
-    };
-};
-
 export const signin = (): { type: string } => {
     return {
         type: "SIGN_IN",
@@ -22,5 +16,12 @@ export const alterSections = (
     return {
         type: "ALTER_SECTIONS",
         sections,
+    };
+};
+
+export const alterDecks = (decks: any[]): { type: string; decks: any[] } => {
+    return {
+        type: "ALTER_DECKS",
+        decks,
     };
 };
