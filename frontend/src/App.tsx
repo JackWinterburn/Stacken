@@ -9,7 +9,6 @@ import {
     BrowserRouter as Router,
     Route,
     Switch, 
-    Link 
 } from "react-router-dom"
 
 function App() {
@@ -18,6 +17,7 @@ function App() {
             <Router>
                 <Header />
 
+                {/* TODO: Move the Switch into its own component */}
                 <Switch>
                     {/* Home page */}
                     <Route exact path="/">
