@@ -1,5 +1,6 @@
 import { HStack, UnorderedList, ListItem } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
+import DarkModeSwitch from "./DarkModeSwitch"
 
 import "../Scss/Header.scss"
 
@@ -23,6 +24,8 @@ function Header() {
                     <ListItem className="nav-link">
                         <Link to="/logout">Logout</Link>
                     </ListItem>
+                    
+                    <DarkModeSwitch />
                 </HStack>
             </UnorderedList>
             </nav>

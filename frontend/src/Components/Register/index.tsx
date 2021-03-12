@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { Redirect, Link } from "react-router-dom"
 import { register } from "../../api/register"
-import { emailErrorToast, accountSuccessfullyCreatedToast } from "./ToastMessage"
+import { emailErrorToast, accountSuccessfullyCreatedToast } from "./ToastMessages"
 
 import "../../Scss/Register.scss"
 
@@ -23,7 +23,7 @@ function Register() {
         password: ""
     })
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setInputState({
             ...inputState,
             [e.target.name]: e.target.value
@@ -37,7 +37,7 @@ function Register() {
         // Checking for Registration Errors
         if (response.Severity === "ERROR") {
             return emailErrorToast()
-        } 
+        }
         else {
             setRedirect(true)
             return accountSuccessfullyCreatedToast()

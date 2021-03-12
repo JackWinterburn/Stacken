@@ -1,4 +1,3 @@
-import React from 'react'
 import { createStandaloneToast } from "@chakra-ui/react"
 
 export function emailErrorToast() {

@@ -5,12 +5,11 @@ export type UserCreatedValue = {
     ID:        number;
     Name:      string;
     Password:  string;
-    // TODO: create the "sections" type
     Sections:  null | [];
     UpdatedAt: string;
 }
 
-// Used in "./api/register.ts"
+// Used in "/api/register.ts"
 export type RegistrationUserInfo = {
     name:    string;
     // TODO: create a unique type for email
