@@ -1,3 +1,11 @@
+.container {
+    margin-top: 3rem;
+    background-color: #f1f1f12f;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+    // border-radius: 5px;
+    border: 1px solid #eee
+}
+
 h1 {
     margin-top: 2rem;
     text-decoration: underline;
@@ -6,6 +14,20 @@ h1 {
 
 .input-field {
     margin: 3rem auto;
+}
+
+.footnote {
+    margin: 3rem auto;
+    width: 100%;
+    text-align: left;
+}
+
+.login-link {
+    color: #3182CE;
+}
+
+.login-link:hover {
+    text-decoration: underline;
 }
 
 .passwd-show-btn {

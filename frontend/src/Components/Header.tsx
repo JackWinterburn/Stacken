@@ -5,7 +5,7 @@ import "../Scss/Header.scss"
 
 function Header() {
     return (
-        <nav>
+        <nav className="navbar">
             <UnorderedList className="nav-links">
                 <HStack>
                     <ListItem className="nav-link">

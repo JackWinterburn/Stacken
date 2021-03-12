@@ -7,22 +7,21 @@ import {
     InputRightElement, 
     InputGroup,
     Button,
-    useToast
 } from "@chakra-ui/react"
-import { Redirect } from "react-router-dom"
-import { register } from "../api/register"
-import { emailErrorToast, accountSuccessfullyCreatedToast } from "./Register/ToastMessage"
+import { Redirect, Link } from "react-router-dom"
+import { register } from "../../api/register"
+import { emailErrorToast, accountSuccessfullyCreatedToast } from "./ToastMessage"
 
-import "../Scss/Register.scss"
+import "../../Scss/Register.scss"
 
 function Register() {
+    const [show, setShow] = useState(false) // hide or show the password input
+    const [redirect, setRedirect] = useState(false) // redirect to login once registered
     const [inputState, setInputState] = useState({
         name: "",
         email: "",
         password: ""
     })
-    const [show, setShow] = useState(false) // hide or show the password input
-    const [redirect, setRedirect] = useState(false) // redirect to login once registered
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setInputState({
@@ -34,9 +33,12 @@ function Register() {
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const response = await register(inputState)
+        
+        // Checking for Registration Errors
         if (response.Severity === "ERROR") {
             return emailErrorToast()
-        } else {
+        } 
+        else {
             setRedirect(true)
             return accountSuccessfullyCreatedToast()
         }
@@ -46,7 +48,7 @@ function Register() {
         redirect ? 
         <Redirect to="/login" />
         :
-        <Container>
+        <Container className="container">
             <Heading as="h1">Register page</Heading>
 
                 <VStack className="input-field">
@@ -57,6 +59,7 @@ function Register() {
                             name="name"
                             value={inputState.name}
                             onChange={handleChange}
+                            mb="0.5rem"
                             type="text"/>
 
                         {/* E-mail */}
@@ -65,6 +68,7 @@ function Register() {
                             name="email"
                             value={inputState.email}
                             onChange={handleChange}
+                            mb="0.5rem"
                             type="email"/>
 
                         {/* Password */}
@@ -74,6 +78,7 @@ function Register() {
                                 name="password"
                                 value={inputState.password}
                                 onChange={handleChange}
+                                mb="0.5rem"
                                 type={show ? "text" : "password"}/>
 
                             <InputRightElement
@@ -93,6 +98,11 @@ function Register() {
                             Create Account
                         </Button>
                     </form>
+
+                    <p className="footnote">
+                        Already have an account?
+                        <Link className="login-link" to="/login"> Login</Link>
+                    </p>
                 </VStack>
         </Container>
     )
