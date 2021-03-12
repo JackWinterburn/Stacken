@@ -18,6 +18,12 @@ export type RegistrationUserInfo = {
     password: string;
 }
 
+// Used in "/api/login.ts"
+export type LoginUserInfo = {
+    email:    string;
+    password: string;
+}
+
 
 export type RegistrationErrorMessage = {
     Code:             string;
