@@ -13,7 +13,7 @@ import {
     Button,
 } from "@chakra-ui/react";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { login } from "../../api/login";
 import { storeInCookies } from "./cookieStore"
 import {
@@ -25,6 +25,7 @@ import "../../Scss/Login.scss"
 
 function Login() {
     const dispatch = useDispatch();
+    const [redirect, setRedirect] = useState(false)
     const [show, setShow] = useState(false); // hide or show the password input
     const [isLoading, setIsLoading] = useState(false);
     const [inputState, setInputState] = useState({
@@ -52,6 +53,7 @@ function Login() {
             //store JWT and user ID in cookie storage
             storeInCookies({authToken, UUID})
             setTimeout(() => setIsLoading(false), 500)
+            setRedirect(true)
             return loginSuccessToast()
         } else {
             setTimeout(() => setIsLoading(false), 500)
@@ -60,6 +62,7 @@ function Login() {
     }
 
     return (
+        redirect? <Redirect to="/" /> :
         <>
             <Flex width="full" align="center" justifyContent="center" mt="6">
                 <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
