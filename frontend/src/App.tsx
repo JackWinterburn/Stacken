@@ -3,8 +3,6 @@ import Login from "./Components/Login"
 import Logout from "./Components/Logout"
 import Register from "./Components/Register"
 import Main from "./Components/Main"
-
-import { Container } from "@chakra-ui/react"
 import { 
     BrowserRouter as Router,
     Route,
@@ -13,7 +11,7 @@ import {
 
 function App() {
     return (
-        <Container className="App">
+        <>
             <Router>
                 <Header />
 
@@ -38,7 +36,7 @@ function App() {
                     </Route>
                 </Switch>
             </Router>       
-        </Container>
+        </>
     );
 }
 

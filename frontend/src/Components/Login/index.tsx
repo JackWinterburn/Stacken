@@ -1,20 +1,24 @@
 import { useState } from "react";
 import {
-    Container,
     Heading,
-    VStack,
     Input, 
-    InputRightElement, 
     InputGroup,
+    InputRightElement,
+    FormControl,
+    Box,
+    FormLabel,
+    Flex,
     Button,
 } from "@chakra-ui/react";
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
 import { Link } from "react-router-dom";
 import { login } from "../../api/login";
 
-import "../../Scss/Login.scss";
+import "../../Scss/Login.scss"
 
 function Login() {
     const [show, setShow] = useState(false) // hide or show the password input
+    const [isLoading, setIsLoading] = useState(false)
     const [inputState, setInputState] = useState({
         email: "",
         password: ""
@@ -23,67 +27,57 @@ function Login() {
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setInputState({
             ...inputState,
-            [e.target.name]: e.target.value
+            [e.target.type]: e.target.value
         });
     }
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setIsLoading(true)
         console.log(await login(inputState))
+        setTimeout(() => setIsLoading(false), 500)
     }
 
     return (
-        <Container className="container">
-            <Heading as="h1">Login page</Heading>
+        <>
+            <Flex width="full" align="center" justifyContent="center" mt="6">
+                <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
+                    <Box textAlign="center">
+                    <Heading>Login</Heading>
+                    </Box>
 
-            <VStack className="input-field">
-            <form onSubmit={onSubmit}>
+                    <Box my={4} textAlign="left">
+                    <form onSubmit={onSubmit}>
+                        <FormControl isRequired>
+                        <FormLabel>Email</FormLabel>
+                        <Input onChange={handleChange} type="email" placeholder="test@example.com" />
+                        </FormControl>
 
-                    {/* E-mail */}
-                    <Input
-                        placeholder="Enter your email address"
-                        name="email"
-                        value={inputState.email}
-                        onChange={handleChange}
-                        mb="0.5rem"
-                        type="email"/>
-
-                        {/* Password */}
-                        <InputGroup className="input-group">
-                            <Input
-                                placeholder="Enter a password" 
-                                name="password"
-                                value={inputState.password}
-                                onChange={handleChange}
-                                mb="0.5rem"
-                                type={show ? "text" : "password"}/>
-
-                            <InputRightElement
-                                className="passwd-show-btn">
-                                <Button
-                                    size="sm"
-                                    onClick={() => setShow(!show)}
-                                    >
-                                    {show ? "Hide" : "Show"}
-                                </Button>
-                            </InputRightElement>
+                        <FormControl mt={6} isRequired>
+                        <FormLabel>Password</FormLabel>
+                        <InputGroup>
+                        <Input onChange={handleChange} type={show ? "text" : "password" } placeholder="*******" />
+                        <InputRightElement w="3rem">
+                        <Button onClick={() => setShow(!show)} size="sm" h="1.5rem">
+                            {show ? <ViewOffIcon /> : <ViewIcon />}
+                        </Button>
+                        </InputRightElement>
                         </InputGroup>
+                        </FormControl>
 
-
-                    <Button 
-                        bg="blue.300"
-                        type="submit">
-                        Login
-                    </Button>
-
-                </form>
-                
+                        <Button isLoading={isLoading} colorScheme="blue" variant="outline" width="full" mt={4} type="submit">
+                        Sign in
+                        </Button>
+                    </form>
+                    </Box>
                 <p className="footnote">
                     Don't have an account set up yet?
-                    <Link className="register-link" to="/register"> Register</Link>
                 </p>
-            </VStack>
-        </Container>
+                <Link className="register-link" to="/register"> Register</Link>
+                </Box>
+            </Flex>
+                    
+    </>
     );
 };
 
