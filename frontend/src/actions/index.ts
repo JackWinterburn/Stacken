@@ -1,0 +1,11 @@
+export const signin = (): { type: string } => {
+    return {
+        type: "SIGN_IN",
+    };
+};
+
+export const signout = (): { type: string } => {
+    return {
+        type: "SIGN_OUT",
+    };
+};

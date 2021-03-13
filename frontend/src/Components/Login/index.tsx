@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux"
+import { signin } from "../../actions"
 import {
     Heading,
     Input, 
@@ -22,8 +24,9 @@ import { loginErrorFeedback } from "./loginErrorFeedback"
 import "../../Scss/Login.scss"
 
 function Login() {
-    const [show, setShow] = useState(false) // hide or show the password input
-    const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch();
+    const [show, setShow] = useState(false); // hide or show the password input
+    const [isLoading, setIsLoading] = useState(false);
     const [inputState, setInputState] = useState({
         email: "",
         password: ""
@@ -37,12 +40,13 @@ function Login() {
     }
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+        e.preventDefault()
         setIsLoading(true)
 
         const response = await login(inputState)
         // response.status is the login error indicator
         if (response.status === true){
+            dispatch(signin())
             let authToken = response.token
             let UUID = response.user.ID
             //store JWT and user ID in cookie storage

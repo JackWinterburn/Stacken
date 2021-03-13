@@ -5,7 +5,6 @@ export function emailErrorToast() {
 
     return (
         toast({
-            title: "Oops",
             description: "Email address not found.",
             status: "error",
             duration: 5000,
@@ -19,7 +18,6 @@ export function passwordErrorToast() {
 
     return (
         toast({
-            title: "Oops",
             description: "Incorrect password.",
             status: "error",
             duration: 5000,
@@ -34,7 +32,7 @@ export function loginSuccessToast() {
     return (
         toast({
             title: "😀",
-            description: "Log in successfull.",
+            description: "Log in was successfull.",
             status: "success",
             duration: 5000,
             isClosable: true,
