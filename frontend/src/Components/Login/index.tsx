@@ -13,6 +13,11 @@ import {
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
 import { Link } from "react-router-dom";
 import { login } from "../../api/login";
+import { storeInCookies } from "./cookieStore"
+import {
+    loginSuccessToast
+} from "./ToastMessages"
+import { loginErrorFeedback } from "./loginErrorFeedback"
 
 import "../../Scss/Login.scss"
 
@@ -34,8 +39,20 @@ function Login() {
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setIsLoading(true)
-        console.log(await login(inputState))
-        setTimeout(() => setIsLoading(false), 500)
+
+        const response = await login(inputState)
+        // response.status is the login error indicator
+        if (response.status === true){
+            let authToken = response.token
+            let UUID = response.user.ID
+            //store JWT and user ID in cookie storage
+            storeInCookies({authToken, UUID})
+            setTimeout(() => setIsLoading(false), 500)
+            return loginSuccessToast()
+        } else {
+            setTimeout(() => setIsLoading(false), 500)
+            loginErrorFeedback(response.message)
+        }
     }
 
     return (
