@@ -8,8 +8,15 @@ import {
     Route,
     Switch, 
 } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { signin, signout } from "./actions"
 
 function App() {
+    const dispatch = useDispatch()
+    
+    if (document.cookie === "") dispatch(signout())
+    else dispatch(signin())
+
     return (
         <>
             <Router>
