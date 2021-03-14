@@ -35,7 +35,7 @@ function Logout() {
     }, [])
 
     return (
-        redirect.go ? <Redirect to="/"/> :
+        redirect.go ? <Redirect to={redirect.to}/> :
         <div>
         <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

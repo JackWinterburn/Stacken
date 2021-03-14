@@ -38,7 +38,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/delete/card/{id}", controllers.DeleteCard).Methods("POST")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
 	})
 
