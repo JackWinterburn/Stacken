@@ -6,6 +6,6 @@ export const isLoggedIn = (state = false, action: {type: "SIGN_IN" | "SIGN_OUT"}
         case "SIGN_OUT":
             return false;
         default:
-            return false;
+            return state;
     }
 }

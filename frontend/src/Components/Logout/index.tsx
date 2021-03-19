@@ -10,7 +10,6 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
     Button,
     Text
 } from "@chakra-ui/react"
@@ -32,7 +31,7 @@ function Logout() {
 
     useEffect(() => {
         onOpen() // open the modal dialogue as soon as the user lands on the page
-    }, [])
+    })
 
     return (
         redirect.go ? <Redirect to={redirect.to}/> :

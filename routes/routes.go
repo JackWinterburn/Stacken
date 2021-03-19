@@ -17,7 +17,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/register", controllers.CreateUser).Methods("POST")
 	r.HandleFunc("/login", controllers.Login).Methods("POST")
 	r.HandleFunc("/users", controllers.GetUsers).Methods("GET")
-	r.HandleFunc("/user/{id}", controllers.GetUser).Methods("GET")
+	r.HandleFunc("/get/user/{id}", controllers.GetUser).Methods("GET")
 
 	// Section Routes
 	r.HandleFunc("/create/section", controllers.CreateSection).Methods("POST")

@@ -9,3 +9,10 @@ export const signout = (): { type: string } => {
         type: "SIGN_OUT",
     };
 };
+
+export const alterSections = (payload: any[]): { type: string, payload: any[] } => {
+    return {
+        type: "ALTER_SECTIONS",
+        payload
+    }
+}
