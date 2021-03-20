@@ -8,7 +8,6 @@ import { SectionsView } from "./SectionsView"
 import {
     Container,
     Heading,
-    Box
 } from "@chakra-ui/react"
 
 

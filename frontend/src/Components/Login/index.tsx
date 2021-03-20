@@ -11,6 +11,7 @@ import {
     FormLabel,
     Flex,
     Button,
+    useColorMode
 } from "@chakra-ui/react"
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
 import { Link, Redirect } from "react-router-dom"
@@ -25,6 +26,7 @@ import "../../Scss/Login.scss"
 
 function Login() {
     const dispatch = useDispatch()
+    const { colorMode } = useColorMode();
     const [redirect, setRedirect] = useState(false)
     const [show, setShow] = useState(false) // hide or show the password input
     const [isLoading, setIsLoading] = useState(false)
@@ -54,10 +56,10 @@ function Login() {
             storeInCookies({authToken, UUID})
             setTimeout(() => setIsLoading(false), 500)
             setRedirect(true)
-            return loginSuccessToast()
+            return loginSuccessToast(colorMode)
         } else {
             setTimeout(() => setIsLoading(false), 500)
-            loginErrorFeedback(response.message)
+            loginErrorFeedback(response.message, colorMode)
         }
     }
 
