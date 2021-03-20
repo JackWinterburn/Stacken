@@ -51,3 +51,17 @@ export type RegistrationSuccessMessage = {
     Severity:     string;
     Value:        UserCreatedValue;
 }
+
+/*--------------------- SECTIONS ---------------------*/
+
+export type Section = {
+    ID:        number;
+    // TODO: Create a dedicated date type
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    Title:     string;
+    UserID:    number;
+    // TODO: Create the "decks" type
+    Decks:     any[] | null;
+}

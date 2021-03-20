@@ -1,4 +1,6 @@
-export const sections = (state = [], action: {type: "ALTER_SECTIONS" | "CLEAR_SECTIONS", payload: any[]}): any => {
+import { Section } from "../types"
+
+export const sections = (state = [], action: {type: "ALTER_SECTIONS" | "CLEAR_SECTIONS", payload: Section[]}): Section[] => {
     switch (action.type) {
         case "ALTER_SECTIONS":
             return action.payload

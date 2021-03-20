@@ -11,10 +11,10 @@ import {
     FormLabel,
     Flex,
     Button,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
-import { Link, Redirect } from "react-router-dom";
-import { login } from "../../api/login";
+import { Link, Redirect } from "react-router-dom"
+import { login } from "../../api/login"
 import { storeInCookies } from "./cookieStore"
 import {
     loginSuccessToast
@@ -24,20 +24,20 @@ import { loginErrorFeedback } from "./loginErrorFeedback"
 import "../../Scss/Login.scss"
 
 function Login() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const [redirect, setRedirect] = useState(false)
-    const [show, setShow] = useState(false); // hide or show the password input
-    const [isLoading, setIsLoading] = useState(false);
+    const [show, setShow] = useState(false) // hide or show the password input
+    const [isLoading, setIsLoading] = useState(false)
     const [inputState, setInputState] = useState({
         email: "",
         password: ""
-    });
+    })
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setInputState({
             ...inputState,
             [e.target.type]: e.target.value
-        });
+        })
     }
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
