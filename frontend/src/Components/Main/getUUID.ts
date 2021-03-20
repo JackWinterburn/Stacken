@@ -1,4 +1,10 @@
 export function getUUID() {
     let c = document.cookie
-    return c.substr(c.indexOf("UUID=" + 5))
+    let arr = c.split(";")
+
+    let UUID=""
+    arr.forEach(el => {
+        if(el.includes("UUID")) UUID = el.substr(6)
+    })
+    return UUID
 }
