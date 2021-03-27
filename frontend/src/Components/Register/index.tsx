@@ -44,8 +44,7 @@ function Register() {
         // Checking for Registration Errors
         if (response.Severity === "ERROR") {
             return emailErrorToast()
-        }
-        else {
+        } else {
             setRedirect(true)
             return accountSuccessfullyCreatedToast()
         }
