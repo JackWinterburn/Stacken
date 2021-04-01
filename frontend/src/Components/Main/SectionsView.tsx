@@ -18,7 +18,7 @@ export function SectionsView() {
             {sections.map((section: Section) => (
             <Box
                 as="button"
-                bg="yellow.400"
+                bg="blue.400"
                 m="1"
                 p="0.5"
                 color="white"

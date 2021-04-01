@@ -27,7 +27,10 @@ function PopoverForm() {
         e.preventDefault()
         let UUID = Number(getUUID())
         console.log(`Form submitted: ${inputVal}`)
-        postEntity("section", {UserID: UUID, title: inputVal}).then((resp) => console.log(resp))
+        postEntity("section", {UserID: UUID, title: inputVal}).then((resp) => {
+            console.log(resp)
+            setInputVal("")
+        })
     }
 
     return (
