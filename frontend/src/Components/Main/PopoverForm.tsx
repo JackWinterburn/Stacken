@@ -10,9 +10,9 @@ import {
     ButtonGroup,
     Button,
 } from "@chakra-ui/react"
-
 import { EditIcon } from "@chakra-ui/icons"
-
+import { postEntity } from "../../api/postEntity"
+import { getUUID } from "./getUUID"
 
 function PopoverForm() {
     // TODO: Get rid of this disgusting "any" type
@@ -25,7 +25,9 @@ function PopoverForm() {
 
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        let UUID = Number(getUUID())
         console.log(`Form submitted: ${inputVal}`)
+        postEntity("section", {UserID: UUID, title: inputVal}).then((resp) => console.log(resp))
     }
 
     return (

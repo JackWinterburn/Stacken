@@ -48,7 +48,7 @@ function Login() {
 
         const response = await login(inputState)
         // response.status is the login error indicator
-        if (response.status === true){
+        if (response.status === true) {
             dispatch(signin())
             let authToken = response.token
             let UUID = response.user.ID

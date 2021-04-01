@@ -14,6 +14,8 @@ import { signin, signout } from "./actions"
 function App() {
     const dispatch = useDispatch()
     
+    // TODO: This does not work anymore because of react cookie consent, please fix this 
+    //       so that it checks specifically for the UUID and user Token
     if (document.cookie === "") dispatch(signout())
     else dispatch(signin())
 
