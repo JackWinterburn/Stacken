@@ -18,11 +18,11 @@ export function SectionsView() {
             {sections.map((section: Section) => (
             <Box
                 as="button"
-                bg="blue.400"
-                m="1"
                 p="0.5"
                 color="white"
                 fontSize="lg"
+                textAlign="left"
+                _hover={{ bg: "gray.700", textDecor: "underline" }}
                 
                 key={section.ID}
             >

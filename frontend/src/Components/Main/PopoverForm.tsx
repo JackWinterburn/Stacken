@@ -47,7 +47,7 @@ function PopoverForm() {
             <PopoverArrow />
             <PopoverBody>
                 <form onSubmit={onSubmit}>
-                    <Input placeholder="Section title" value={inputVal} ref={initialFocusRef} onChange={onChange}/>
+                    <Input required placeholder="Section title" value={inputVal} ref={initialFocusRef} onChange={onChange}/>
                     <ButtonGroup mt="4" size="sm" isAttached variant="outline">
                     <Button bg="red.300" mr="-px" onClick={onClose}>Cancel</Button>
                     <Button bg="green.300" type="submit">Save</Button>
