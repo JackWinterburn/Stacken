@@ -1,10 +1,10 @@
 type jsonQuery = {
-    UserID:      number;
-    SectionID?:  number;
-    DeckID?:     number;
-    title?:      string;
-    question?:   string;
-    answer?:     string;
+    UserID    :      number;
+    SectionID?:      number;
+    DeckID   ?:      number;
+    title    ?:      string;
+    question ?:      string;
+    answer   ?:      string;
 }
 
 export async function postEntity(entity: "section" | "deck" | "card", requestedCreationData: jsonQuery) {
