@@ -12,25 +12,26 @@ import {
 } from "@chakra-ui/react"
 import { EditIcon } from "@chakra-ui/icons"
 import { postEntity } from "../../api/postEntity"
+import { useDispatch } from "react-redux"
+import { alterSections } from "../../actions"
 import { getUUID } from "./getUUID"
+import { getEntity } from "../../api/getEntity"
 
 function PopoverForm() {
     // TODO: Get rid of this disgusting "any" type
     const initialFocusRef = useRef<any>()
     const [inputVal, setInputVal] = useState("")
+    const dispatch = useDispatch()
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
         setInputVal(e.target.value)
     }
 
-    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         let UUID = Number(getUUID())
-        console.log(`Form submitted: ${inputVal}`)
-        postEntity("section", {UserID: UUID, title: inputVal}).then((resp) => {
-            console.log(resp)
-            setInputVal("")
-        })
+        await postEntity("section", {UserID: UUID, title: inputVal}).then(() => setInputVal(""))
+        await getEntity("user", getUUID()).then((resp) => dispatch(alterSections(resp.Sections)))
     }
 
     return (
