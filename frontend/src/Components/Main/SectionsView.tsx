@@ -1,4 +1,6 @@
 import React from 'react'
+import CookieConsent  from "react-cookie-consent"
+import PopoverForm from "./PopoverForm"
 import { Section } from "../../types"
 import { deleteEntity } from "../../api/deleteEntity"
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux"
@@ -7,26 +9,18 @@ import {
     Flex,
     Text,
     IconButton,
-    useColorMode
 } from "@chakra-ui/react"
 import { DeleteIcon } from "@chakra-ui/icons"
-import CookieConsent  from "react-cookie-consent"
-import PopoverForm from "./PopoverForm"
 import { alterSections } from "../../actions"
 import { getUUID } from "./getUUID"
 import { getEntity } from "../../api/getEntity"
+import { Link } from "react-router-dom"
 
 import "../../Scss/SectionsView.scss"
 
 export function SectionsView() {
     const sections = useSelector((state: RootStateOrAny) => state.sections)
     const dispatch = useDispatch()
-    const {colorMode} = useColorMode()
-
-    let sectionHoverBg: string
-    if (colorMode === "light")
-        sectionHoverBg = "gray.100"
-    else sectionHoverBg = "gray.700"
 
     async function onDelete(ID: number | string) {
         await deleteEntity("section", ID)
@@ -37,17 +31,23 @@ export function SectionsView() {
         <>
         <Flex direction="column" mt="10">
             {sections.map((section: Section) => (
+            <Flex direction="row" justifyContent="space-between">
+            <Link to="/decks">
             <Box
                 p="0.5"
                 fontSize="lg"
                 textAlign="left"
-                _hover={{ bg: sectionHoverBg, textDecor: "underline" }}
+                _hover={{ textDecor: "underline" }}
                 key={section.ID}
-            >
+                >
+                
                 {section.Title}
-                <IconButton variant="ghost" size="sm" aria-label="delete section" float="right" icon={
-                <DeleteIcon onClick={() => onDelete(section.ID) } />}/>
+
             </Box>
+            </Link>
+            <IconButton variant="ghost" size="sm" aria-label="delete section" float="right" icon={
+                <DeleteIcon onClick={() => onDelete(section.ID) } />}/>
+            </Flex>
         ))}
 
         <PopoverForm />

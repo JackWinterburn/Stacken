@@ -3,6 +3,7 @@ import Login from "./Components/Login"
 import Logout from "./Components/Logout"
 import Register from "./Components/Register"
 import Main from "./Components/Main"
+import DecksView from "./Components/Main/DecksView"
 import { 
     BrowserRouter as Router,
     Route,
@@ -29,6 +30,11 @@ function App() {
                     {/* Home page */}
                     <Route exact path="/">
                         <Main />
+                    </Route>
+
+                    {/* Decks page: used to store cards in a folder style */}
+                    <Route exact path="/decks">
+                        <DecksView />
                     </Route>
 
                     {/* User and Auth routes */}
