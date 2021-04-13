@@ -29,7 +29,7 @@ function Login() {
     const { colorMode } = useColorMode();
     const [redirect, setRedirect] = useState(false)
     const [show, setShow] = useState(false) // hide or show the password input
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false) // loading spinner for the submit button
     const [inputState, setInputState] = useState({
         email: "",
         password: ""
