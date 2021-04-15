@@ -33,7 +33,7 @@ function App() {
                     </Route>
 
                     {/* Decks page: used to store cards in a folder style */}
-                    <Route exact path="/decks">
+                    <Route exact path="/:sectionTitle/:sectionID/decks">
                         <DecksView />
                     </Route>
 

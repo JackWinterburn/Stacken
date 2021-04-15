@@ -31,8 +31,8 @@ export function SectionsView() {
         <>
         <Flex direction="column" mt="10">
             {sections.map((section: Section) => (
-            <Flex direction="row" justifyContent="space-between">
-            <Link to="/decks">
+            <Flex direction="row" justifyContent="space-between" key={section.ID}>
+            <Link to={`/${section.Title}/${section.ID}/decks`}>
             <Box
                 p="0.5"
                 fontSize="lg"
@@ -40,8 +40,9 @@ export function SectionsView() {
                 _hover={{ textDecor: "underline" }}
                 key={section.ID}
                 >
-                
-                {section.Title}
+                <Text>
+                    {section.Title}
+                </Text>
 
             </Box>
             </Link>
