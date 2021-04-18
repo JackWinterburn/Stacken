@@ -62,6 +62,16 @@ export type Section = {
     DeletedAt: string | null;
     Title:     string;
     UserID:    number;
-    // TODO: Create the "decks" type
-    Decks:     any[] | null;
+    Decks:     Deck[] | null;
+}
+
+export type Deck = {
+    ID:        number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    Title:     string
+    SectionID: number;
+    Cards:     any[] | null;
+
 }

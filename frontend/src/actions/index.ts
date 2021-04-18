@@ -16,3 +16,10 @@ export const alterSections = (payload: any[]): { type: string, payload: any[] } 
         payload
     }
 }
+
+export const alterDecks = (payload: any[]): { type: string, payload: any[] } => {
+    return {
+        type: "ALTER_DECKS",
+        payload
+    }
+}
