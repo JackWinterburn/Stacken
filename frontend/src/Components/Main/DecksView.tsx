@@ -31,7 +31,14 @@ function DecksView() {
             getEntity("section", sectionID).then(resp => dispatch(alterDecks(resp.Decks)))
         }
     }, [sectionID, dispatch])
-    console.log(decks)
+
+    function shortenBreadcrumbItem(breadCrumbItem: string) {
+        if (breadCrumbItem.length > 25) {
+            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 21) + "..."
+            return shortenedBreadCrumbItem
+        }
+        return breadCrumbItem
+    }
 
     if (decks[0] && decks[0].CreatedAt === "DEFAULT") {
         // TODO: extract this useless piece of crap into its own component pls :)
@@ -74,7 +81,7 @@ function DecksView() {
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                 <Link className="bdcm-link" to="#">
-                    { sectionTitle }
+                    { shortenBreadcrumbItem(sectionTitle) }
                 </Link> 
                 </BreadcrumbItem>
             </Breadcrumb>
