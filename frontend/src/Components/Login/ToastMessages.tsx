@@ -45,3 +45,18 @@ export function loginSuccessToast(colorMode: ColorMode) {
     }
         </>
 )}
+
+
+export function invalidFormToast() {
+    const toast = createStandaloneToast()
+
+    return (
+        toast({
+            description: "Please get rid of any illegal characters in your title",
+            status: "error",
+            position: "bottom-left",
+            duration: 5000,
+            isClosable: true,
+        })
+    )
+}

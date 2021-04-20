@@ -7,10 +7,12 @@ import {
     PopoverBody,
     PopoverArrow,
     Input,
+    Text,
     ButtonGroup,
     Button,
 } from "@chakra-ui/react"
 import { EditIcon } from "@chakra-ui/icons"
+import { invalidFormToast } from "../Login/ToastMessages"
 import { postEntity } from "../../api/postEntity"
 import { useDispatch } from "react-redux"
 import { alterSections } from "../../actions"
@@ -27,11 +29,20 @@ function PopoverForm() {
         setInputVal(e.target.value)
     }
 
+    function validateForm() {
+        if (inputVal.includes("/") || inputVal.includes("#")) return "Please try to keep it alphanumberic (✨emojis are allowed✨)"
+        return false
+    }
+
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        let UUID = Number(getUUID())
-        await postEntity("section", {UserID: UUID, title: inputVal}).then(() => setInputVal(""))
-        await getEntity("user", getUUID()).then((resp) => dispatch(alterSections(resp.Sections)))
+        if (!validateForm()){
+            let UUID = Number(getUUID())
+            await postEntity("section", {UserID: UUID, title: inputVal}).then(() => setInputVal(""))
+            await getEntity("user", getUUID()).then((resp) => dispatch(alterSections(resp.Sections)))
+        } else {
+            return invalidFormToast()
+        }
     }
 
     return (
@@ -47,7 +58,8 @@ function PopoverForm() {
             <PopoverArrow />
             <PopoverBody>
                 <form onSubmit={onSubmit}>
-                    <Input pattern="^[a-zA-Z0-9]+$" maxLength={35} required placeholder="Section title" value={inputVal} ref={initialFocusRef} onChange={onChange}/>
+                    <Input maxLength={35} required placeholder="Section title" value={inputVal} ref={initialFocusRef} onChange={onChange}/>
+                    <Text color="red.500">{validateForm()}</Text>
                     <ButtonGroup mt="4" size="sm" isAttached variant="outline">
                     <Button bg="red.500" variant="ghost" mr="-px" onClick={onClose}>Cancel</Button>
                     <Button bg="green.300" variant="ghost" type="submit">Save</Button>
