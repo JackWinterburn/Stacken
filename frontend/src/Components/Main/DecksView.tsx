@@ -34,6 +34,7 @@ function DecksView() {
     console.log(decks)
 
     if (decks[0] && decks[0].CreatedAt === "DEFAULT") {
+        // TODO: extract this useless piece of crap into its own component pls :)
         return (
         <Container textAlign="center">
         <Heading>Decks Page</Heading>
