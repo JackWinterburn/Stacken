@@ -9,6 +9,9 @@ import {
     Flex,
     Text,
     IconButton,
+    Breadcrumb,
+    BreadcrumbItem,
+    Tag
 } from "@chakra-ui/react"
 import { DeleteIcon } from "@chakra-ui/icons"
 import { alterSections } from "../../actions"
@@ -30,6 +33,16 @@ export function SectionsView() {
     return (
         <>
         <Flex direction="column" mt="10">
+        <Tag size="sm" mb="5" borderRadius="full">
+         <Breadcrumb textAlign="left">
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to="/">
+                    Home
+            </Link>
+            </BreadcrumbItem>
+          </Breadcrumb>
+          </Tag>
+
             {sections.map((section: Section) => (
             <Flex direction="row" justifyContent="space-between" key={section.ID}>
             <Link to={`/${section.Title}/${section.ID}/decks`}>

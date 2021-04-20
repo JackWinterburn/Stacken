@@ -23,3 +23,25 @@ export const alterDecks = (payload: any[]): { type: string, payload: any[] } => 
         payload
     }
 }
+
+export const clearDecks = (): { type: string, payload: any[] } => {
+    return {
+        type: "CLEAR_DECKS",
+        payload: []
+    }
+}
+
+export const resetDecks = (): { type: string, payload: any[] } => {
+    return {
+        type: "RESET_DECKS",
+        payload: [{
+            ID: 0,
+            CreatedAt: "DEFAULT",
+            UpdatedAt: "DEFAULT",
+            DeletedAt: "DEFAULT",
+            Title: "DEFAULT",
+            SectionID: 0,
+            Cards: null
+        }]
+    }
+}
