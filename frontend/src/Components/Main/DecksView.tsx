@@ -55,7 +55,7 @@ function DecksView() {
             </BreadcrumbItem>
             <BreadcrumbItem>
             <Link className="bdcm-link" to="#">
-                { sectionTitle }
+                { shortenBreadcrumbItem(sectionTitle) }
             </Link> 
             </BreadcrumbItem>
         </Breadcrumb>
