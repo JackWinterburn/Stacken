@@ -4,6 +4,7 @@ import Logout from "./Components/Logout"
 import Register from "./Components/Register"
 import Main from "./Components/Main"
 import DecksView from "./Components/Main/DecksView"
+import CardsView from "./Components/Main/CardsView"
 import { 
     BrowserRouter as Router,
     Route,
@@ -35,6 +36,11 @@ function App() {
                     {/* Decks page: used to store cards in a folder style */}
                     <Route exact path="/:sectionTitle/:sectionID/decks">
                         <DecksView />
+                    </Route>
+
+                    {/* Cards page: used to start going over a deck of cards */}
+                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID/cards">
+                        <CardsView />
                     </Route>
 
                     {/* User and Auth routes */}

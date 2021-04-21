@@ -64,7 +64,7 @@ export function SectionsView() {
             </Flex>
         ))}
 
-        <PopoverForm />
+        <PopoverForm entity="section" parentID={getUUID()}/>
 
         </Flex>
         <CookieConsent

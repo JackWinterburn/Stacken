@@ -1,5 +1,5 @@
 type jsonQuery = {
-    UserID    :      number;
+    UserID?   :      number;
     SectionID?:      number;
     DeckID   ?:      number;
     title    ?:      string;

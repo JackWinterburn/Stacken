@@ -1,3 +1,4 @@
+import PopoverForm from "./PopoverForm"
 import { useEffect } from "react"
 import { Deck } from "../../types"
 import { 
@@ -94,6 +95,7 @@ function DecksView() {
                 </Box>
                 </Flex>
             ))}
+            <PopoverForm entity="deck" parentID={sectionID}/>
             </Flex>
             </Container>
     )}
