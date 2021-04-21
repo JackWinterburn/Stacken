@@ -34,12 +34,12 @@ function App() {
                     </Route>
 
                     {/* Decks page: used to store cards in a folder style */}
-                    <Route exact path="/:sectionTitle/:sectionID/decks">
+                    <Route exact path="/:sectionTitle/:sectionID">
                         <DecksView />
                     </Route>
 
                     {/* Cards page: used to start going over a deck of cards */}
-                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID/cards">
+                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID">
                         <CardsView />
                     </Route>
 

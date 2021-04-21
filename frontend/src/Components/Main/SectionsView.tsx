@@ -45,7 +45,7 @@ export function SectionsView() {
 
             {sections.map((section: Section) => (
             <Flex direction="row" justifyContent="space-between" key={section.ID}>
-            <Link to={`/${section.Title}/${section.ID}/decks`}>
+            <Link to={`/${section.Title}/${section.ID}`}>
             <Box
                 p="0.5"
                 fontSize="lg"

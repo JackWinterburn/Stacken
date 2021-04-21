@@ -11,12 +11,15 @@ import {
     Tag,
     Breadcrumb,
     BreadcrumbItem,
+    IconButton,
     Skeleton
 } from "@chakra-ui/react"
+import { DeleteIcon } from "@chakra-ui/icons"
 import { useParams, Link } from "react-router-dom"
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux"
 import { alterDecks, resetDecks } from "../../actions"
 import { getEntity } from "../../api/getEntity"
+import { deleteEntity } from "../../api/deleteEntity"
 import { getUUID } from "./getUUID"
 
 import "../../Scss/BreadcrumbLinks.scss"
@@ -32,6 +35,11 @@ function DecksView() {
             getEntity("section", sectionID).then(resp => dispatch(alterDecks(resp.Decks)))
         }
     }, [sectionID, dispatch])
+
+    async function onDelete(ID: number | string) {
+        await deleteEntity("deck", ID)
+        await getEntity("section", sectionID).then((resp) => dispatch(alterDecks(resp.Decks)))
+    }
 
     function shortenBreadcrumbItem(breadCrumbItem: string) {
         if (breadCrumbItem.length > 25) {
@@ -89,11 +97,15 @@ function DecksView() {
             </Tag>
 
             {decks.map((deck: Deck) => (
-                <Flex direction="row" justifyContent="space-between" key={deck.ID}>
-                <Box>
-                <Text>{deck.Title}</Text>
-                </Box>
-                </Flex>
+            <Flex direction="row" justifyContent="space-between" key={deck.ID}>
+            <Link to={`/${sectionTitle}/${sectionID}/${deck.Title}/${deck.ID}`}>
+            <Box>
+            <Text>{deck.Title}</Text>
+            </Box>
+            </Link>
+            <IconButton variant="ghost" size="sm" aria-label="delete section" float="right" icon={
+                <DeleteIcon onClick={() => onDelete(deck.ID) } />}/>
+            </Flex>
             ))}
             <PopoverForm entity="deck" parentID={sectionID}/>
             </Flex>
