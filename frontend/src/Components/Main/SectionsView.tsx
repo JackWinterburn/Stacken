@@ -48,7 +48,6 @@ export function SectionsView() {
             <Link to={`/${section.Title}/${section.ID}`}>
             <Box
                 p="0.5"
-                fontSize="lg"
                 textAlign="left"
                 _hover={{ textDecor: "underline" }}
                 key={section.ID}

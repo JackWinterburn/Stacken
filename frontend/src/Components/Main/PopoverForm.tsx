@@ -42,7 +42,9 @@ function PopoverForm({entity, parentID}: {entity: "section" | "deck", parentID: 
     }
 
     function validateForm() {
-        if (inputVal.includes("/") || inputVal.includes("#")) return "Please try to keep it alphanumeric (✨emojis are allowed✨)"
+        if (inputVal.includes("/") 
+            || inputVal.includes("#")
+            || inputVal.includes("%")) return "Please try to keep it alphanumeric (✨emojis are allowed✨)"
         return false
     }
 
@@ -73,8 +75,8 @@ function PopoverForm({entity, parentID}: {entity: "section" | "deck", parentID: 
                     <Input maxLength={35} required placeholder={`${entity} title`} value={inputVal} ref={initialFocusRef} onChange={onChange}/>
                     <Text color="red.500">{validateForm()}</Text>
                     <ButtonGroup mt="4" size="sm" isAttached variant="outline">
-                    <Button bg="red.500" variant="ghost" mr="-px" onClick={onClose}>Cancel</Button>
-                    <Button bg="green.300" variant="ghost" type="submit">Save</Button>
+                    <Button colorScheme="red" variant="solid" mr="-px" onClick={onClose}>Cancel</Button>
+                    <Button colorScheme="green" variant="solid" type="submit">Save</Button>
                     </ButtonGroup>
                 </form>
             </PopoverBody>
