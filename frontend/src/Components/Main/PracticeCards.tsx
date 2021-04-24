@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import AddCardsModal from "./AddCardsModal"
-import { Heading,
-    Container,
-    Box, 
-    Button, 
+import React, { useEffect, useState } from 'react'
+import { Card } from "../../types"
+import { 
+    Heading, 
+    Container, 
+    Table,
+    TableCaption, 
+    Thead,
+    Tr,
+    Th,
+    Td,
+    Tbody,
     Tag,
-    Badge,
-    Flex,
     Breadcrumb,
     BreadcrumbItem,
-    useDisclosure
+    Box,
+    Flex
 } from "@chakra-ui/react"
-import { useParams, Link, useLocation } from "react-router-dom"
 import { getEntity } from "../../api/getEntity"
+import { useParams, Link } from "react-router-dom"
 
-function CardsView() {
+function PracticeCards() {
     const { sectionTitle, sectionID, deckTitle, deckID } = useParams<{sectionTitle: string, sectionID: string, deckTitle: string, deckID: string}>()
-    const location = useLocation()
-    const { isOpen, onClose, onOpen } = useDisclosure()
-    const [amntOfCardsInDeck, setAmntOfCardsInDeck] = useState<number>()
+    const [cards, setCards] = useState<Card[]>()
 
     useEffect(() => {
-        getEntity("deck", deckID).then(resp => setAmntOfCardsInDeck(resp.Cards.length))
+        getEntity("deck", deckID).then(resp => setCards(resp.Cards))
     }, [deckID])
 
     function shortenBreadcrumbItem(breadCrumbItem: string) {
@@ -34,7 +37,6 @@ function CardsView() {
 
     return (
         <Container textAlign="center">
-        <AddCardsModal isOpen={isOpen} onClose={onClose} setAmntOfCardsInDeck={setAmntOfCardsInDeck}/>
         <Flex direction="column">
         <Tag size="sm" mb="5" borderRadius="full" mt="10">
         <Breadcrumb textAlign="left">
@@ -49,27 +51,35 @@ function CardsView() {
             </Link> 
             </BreadcrumbItem>
             <BreadcrumbItem>
-            <Link className="bdcm-link" to="#">
+            <Link className="bdcm-link" to={`/${sectionTitle}/${sectionID}/${deckTitle}/${deckID}`}>
                 { shortenBreadcrumbItem(deckTitle) }
             </Link> 
             </BreadcrumbItem>
         </Breadcrumb>
         </Tag>
         </Flex>
-        <Box as="main" p={8} mt="6" maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
-            <Box>
-            <Heading mb="3">
-                {deckTitle}
-            </Heading>
-            <Badge variant="solid" mb="3">{amntOfCardsInDeck} cards in this deck</Badge>
-            </Box>
-            <Link to={`${location.pathname}/cards`}>
-            <Button m="3" colorScheme="green">Start deck</Button>
-            </Link>
-            <Button m="3" colorScheme="blue" onClick={onOpen}>Add Cards</Button>
+
+        <Box mt="6" borderWidth="thin" borderRadius="lg" boxShadow="lg">
+        <Table variant="striped" >
+            <TableCaption>Cards</TableCaption>
+            <Thead>
+                <Tr>
+                <Th>Front</Th>
+                <Th>Back</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
+                {cards?.map((card, idx) => (
+                <Tr key={idx}>
+                    <Td>{card.Front}</Td>
+                    <Td>{card.Back}</Td>
+                </Tr>
+                ))}
+            </Tbody>
+        </Table>
         </Box>
         </Container>
     )
 }
 
-export default CardsView
+export default PracticeCards

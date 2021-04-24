@@ -5,11 +5,14 @@ import Register from "./Components/Register"
 import Main from "./Components/Main"
 import DecksView from "./Components/Main/DecksView"
 import CardsView from "./Components/Main/CardsView"
+import PracticeCards from "./Components/Main/PracticeCards"
+import CookieConsent  from "react-cookie-consent"
 import { 
     BrowserRouter as Router,
     Route,
     Switch, 
 } from "react-router-dom"
+import { Text } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { signin, signout } from "./actions"
 
@@ -38,9 +41,13 @@ function App() {
                         <DecksView />
                     </Route>
 
-                    {/* Cards page: used to start going over a deck of cards */}
-                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID">
+                    {/* Cards page: used to perform actions on a deck of cards */}
+                    <Route exact path="/:sectionTitle/:sectionID/:deckTitle/:deckID">
                         <CardsView />
+                    </Route>
+                    {/* Practice Cards page: used to go over a deck of cards */}
+                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID/cards">
+                        <PracticeCards />
                     </Route>
 
                     {/* User and Auth routes */}
@@ -56,7 +63,18 @@ function App() {
                         <Logout />
                     </Route>
                 </Switch>
-            </Router>       
+            </Router>
+            <CookieConsent
+            location="bottom"
+            buttonText="Accept"
+            cookieName="CookiePermission"
+            style={{ background: "#141924", textAlign: "center" }}
+            buttonStyle={{ color: "white", fontSize: "15px", background: "#3182CE", borderRadius: "3px"}}
+            expires={900}
+        >
+            This app uses cookies to provide the required functionality.
+            <Text size="sm" color="blue.200">We do not store any user sensitive data.</Text>
+        </CookieConsent>
         </>
     );
 }

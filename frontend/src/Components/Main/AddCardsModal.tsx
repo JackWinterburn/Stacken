@@ -73,7 +73,7 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
                 <Textarea name="back" value={inputState.back} onChange={onChange} placeholder="Deoxyribonucleic Acid"/>
                 </FormControl>
 
-                <Button ref={submitRef} float="right" mt="6" type="submit" variant="ghost">Add Card</Button>  
+                <Button ref={submitRef} float="right" mt="6" type="submit" variant="outline" colorScheme="blue">Add Card</Button>  
             </form>
         </ModalBody>
 

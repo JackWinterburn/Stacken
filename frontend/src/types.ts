@@ -72,6 +72,16 @@ export type Deck = {
     DeletedAt: string | null;
     Title:     string
     SectionID: number;
-    Cards:     any[] | null;
+    Cards:     Card[] | null;
 
+}
+
+export type Card = {
+    Back:      string;
+    CreatedAt: string;
+    DeckID:    number;
+    DeletedAt: string | null;
+    Front:     string;
+    ID:        number;
+    UpdatedAt: string;
 }
