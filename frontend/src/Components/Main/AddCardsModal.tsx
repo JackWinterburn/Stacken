@@ -22,6 +22,7 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
         back: ""
     })
     const submitRef = useRef<any>()
+    const frontTextareaRef = useRef<any>()
 
     useEffect(() => {
         document.addEventListener("keydown", ctrlPlusEnterHandler)
@@ -46,6 +47,7 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
         if(e !== undefined) e.preventDefault()
             await postEntity("card", {DeckID: Number(deckID), Front: inputState.front, Back: inputState.back})
             setInputState({ front: "", back: "" })
+            frontTextareaRef.current.focus()
             setAmntOfCardsInDeck(prevState => prevState !== undefined ? prevState + 1 : undefined)
     }
 
@@ -60,7 +62,12 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
             <form onSubmit={onSubmit}>
                 <FormControl isRequired>
                 <FormLabel>Front</FormLabel>
-                <Textarea name="front" value={inputState.front} onChange={onChange} placeholder="What does DNA stand for?"/>
+                <Textarea 
+                    autoFocus 
+                    ref={frontTextareaRef} 
+                    name="front" 
+                    value={inputState.front} 
+                    onChange={onChange} placeholder="What does DNA stand for?"/>
 
                 <FormLabel mt="3">Back</FormLabel>
                 <Textarea name="back" value={inputState.back} onChange={onChange} placeholder="Deoxyribonucleic Acid"/>
