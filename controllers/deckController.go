@@ -27,7 +27,10 @@ func GetDeck(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
 	var deck models.Deck
-	database.First(&deck, params["id"])
+	var cards []models.Card
+	database.First(&deck, params["id"]).Related(&cards)
+
+	deck.Cards = cards
 
 	json.NewEncoder(w).Encode(deck)
 }

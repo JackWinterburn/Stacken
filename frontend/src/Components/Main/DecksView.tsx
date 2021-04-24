@@ -2,7 +2,6 @@ import PopoverForm from "./PopoverForm"
 import { useEffect } from "react"
 import { Deck } from "../../types"
 import { 
-    Heading,
     Container,
     Flex,
     Box,
@@ -53,7 +52,6 @@ function DecksView() {
         // TODO: extract this useless piece of crap into its own component pls :)
         return (
         <Container textAlign="center">
-        <Heading>Decks Page</Heading>
         <Flex direction="column" mt="10">
         <Tag size="sm" mb="5" borderRadius="full">
         <Breadcrumb textAlign="left">
@@ -79,7 +77,6 @@ function DecksView() {
     )}  else {
             return (
             <Container textAlign="center">
-            <Heading>Decks Page</Heading>
             <Flex direction="column" mt="10">
             <Tag size="sm" mb="5" borderRadius="full">
             <Breadcrumb textAlign="left">

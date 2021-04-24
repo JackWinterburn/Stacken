@@ -7,7 +7,6 @@ import { getUUID } from "./getUUID"
 import { SectionsView } from "./SectionsView"
 import {
     Container,
-    Heading,
 } from "@chakra-ui/react"
 
 
@@ -28,7 +27,6 @@ function Main() {
             {HandleNotLoggedIn()}
             
             <Container textAlign="center">
-            <Heading>Main Page</Heading>
 
             <SectionsView />
             </Container>
