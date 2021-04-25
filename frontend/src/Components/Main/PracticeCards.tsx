@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import gfm from "remark-gfm"
+import rehypeSanitize from "rehype-sanitize"
+import rehypeRaw from "rehype-raw"
+import Markdown from 'react-markdown'
 import { Card } from "../../types"
 import { 
-    Heading, 
     Container, 
     Table,
     TableCaption, 
@@ -20,6 +23,8 @@ import { getEntity } from "../../api/getEntity"
 import { useParams, Link } from "react-router-dom"
 
 function PracticeCards() {
+    // no declaration file nor @types support :(, had to use require syntax
+    const rehypeHighlight = require("rehype-highlight")
     const { sectionTitle, sectionID, deckTitle, deckID } = useParams<{sectionTitle: string, sectionID: string, deckTitle: string, deckID: string}>()
     const [cards, setCards] = useState<Card[]>()
 
@@ -71,8 +76,8 @@ function PracticeCards() {
             <Tbody>
                 {cards?.map((card, idx) => (
                 <Tr key={idx}>
-                    <Td>{card.Front}</Td>
-                    <Td>{card.Back}</Td>
+                    <Td><Markdown remarkPlugins={[gfm]} rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Front}</Markdown></Td>
+                    <Td><Markdown remarkPlugins={[gfm]} rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Back}</Markdown></Td>
                 </Tr>
                 ))}
             </Tbody>

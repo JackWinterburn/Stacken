@@ -1,0 +1,11 @@
+$drag-icon: url("../drag_icon.svg");
+
+* ::-webkit-scrollbar{
+    width: 0.5em
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(104, 104, 104, 0.3);
+    border-radius: 10px;
+}
+

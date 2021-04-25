@@ -16,6 +16,8 @@ import { Text } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { signin, signout } from "./actions"
 
+import "./Scss/App.scss"
+
 function App() {
     const dispatch = useDispatch()
     

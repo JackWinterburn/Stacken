@@ -34,7 +34,6 @@ function CardsView() {
 
     return (
         <Container textAlign="center">
-        <AddCardsModal isOpen={isOpen} onClose={onClose} setAmntOfCardsInDeck={setAmntOfCardsInDeck}/>
         <Flex direction="column">
         <Tag size="sm" mb="5" borderRadius="full" mt="10">
         <Breadcrumb textAlign="left">
@@ -68,6 +67,7 @@ function CardsView() {
             </Link>
             <Button m="3" colorScheme="blue" onClick={onOpen}>Add Cards</Button>
         </Box>
+        <AddCardsModal isOpen={isOpen} onClose={onClose} setAmntOfCardsInDeck={setAmntOfCardsInDeck}/>
         </Container>
     )
 }

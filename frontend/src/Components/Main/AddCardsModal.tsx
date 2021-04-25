@@ -62,15 +62,21 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
             <form onSubmit={onSubmit}>
                 <FormControl isRequired>
                 <FormLabel>Front</FormLabel>
-                <Textarea 
+                <Textarea
                     autoFocus 
+                    h="7em"
                     ref={frontTextareaRef} 
                     name="front" 
                     value={inputState.front} 
                     onChange={onChange} placeholder="What does DNA stand for?"/>
 
                 <FormLabel mt="3">Back</FormLabel>
-                <Textarea name="back" value={inputState.back} onChange={onChange} placeholder="Deoxyribonucleic Acid"/>
+                <Textarea 
+                    h="7em"
+                    name="back" 
+                    value={inputState.back} 
+                    onChange={onChange} 
+                    placeholder="Deoxyribonucleic Acid"/>
                 </FormControl>
 
                 <Button ref={submitRef} float="right" mt="6" type="submit" variant="outline" colorScheme="blue">Add Card</Button>  
