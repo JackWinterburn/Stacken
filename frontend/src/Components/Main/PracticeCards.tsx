@@ -76,8 +76,16 @@ function PracticeCards() {
             <Tbody>
                 {cards?.map((card, idx) => (
                 <Tr key={idx}>
-                    <Td><Markdown remarkPlugins={[gfm]} rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Front}</Markdown></Td>
-                    <Td><Markdown remarkPlugins={[gfm]} rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Back}</Markdown></Td>
+                <Td>
+                    <Markdown 
+                        remarkPlugins={[gfm]} 
+                        rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Front}</Markdown>
+                </Td>
+                <Td>
+                    <Markdown 
+                        remarkPlugins={[gfm]} 
+                        rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Back}</Markdown>
+                </Td>
                 </Tr>
                 ))}
             </Tbody>
