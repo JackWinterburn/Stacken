@@ -29,8 +29,6 @@ func Connect() *gorm.DB {
 		fmt.Println("error", err)
 		panic(err)
 	}
-	// close db when not in use
-	//defer db.Close()
 
 	// Migrate the schemas
 	db.AutoMigrate(&models.User{})
