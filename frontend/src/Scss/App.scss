@@ -5,12 +5,13 @@ $drag-icon: url("../drag_icon.svg");
 }
 
 * ::-webkit-scrollbar{
-    width: 0.7em
+    width: 0.8em
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: rgba(104, 104, 104, 0.3);
     margin: 5px;
+    transition: 0.3s ease !important;
 }
 
 *::-webkit-scrollbar-thumb:hover {

@@ -3,11 +3,28 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
+	"time"
 
 	"github.com/JackWinterburn/stacken/models"
 	"github.com/gorilla/mux"
 )
+
+// shuffleDeck is used to shuffle the cards in a deck when requested by the frontend
+func shuffleDeck(workDeck []models.Card) []models.Card {
+
+	shuffled := make([]models.Card, len(workDeck))
+
+	rand.Seed(time.Now().UTC().UnixNano())
+	perm := rand.Perm(len(workDeck))
+
+	for i, v := range perm {
+		shuffled[v] = workDeck[i]
+	}
+
+	return shuffled
+}
 
 func GetDecks(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -30,7 +47,7 @@ func GetDeck(w http.ResponseWriter, r *http.Request) {
 	var cards []models.Card
 	database.First(&deck, params["id"]).Related(&cards)
 
-	deck.Cards = cards
+	deck.Cards = shuffleDeck(cards)
 
 	json.NewEncoder(w).Encode(deck)
 }
