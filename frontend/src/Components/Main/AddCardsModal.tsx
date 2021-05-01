@@ -11,6 +11,10 @@ import {
     FormControl,
     FormLabel,
     Textarea,
+    Kbd,
+    Box,
+    Text,
+    VStack
 } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
 import { postEntity } from "../../api/postEntity"
@@ -79,12 +83,12 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
                     placeholder="Deoxyribonucleic Acid"/>
                 </FormControl>
 
-                <Button ref={submitRef} float="right" mt="6" type="submit" variant="outline" colorScheme="blue">Add Card</Button>  
+                <VStack float="right">
+                    <Box><Kbd>ctr</Kbd> + <Kbd>Enter</Kbd></Box>
+                    <Button ref={submitRef} mt="6" type="submit" variant="outline" colorScheme="blue">Add Card</Button>  
+                </VStack>
             </form>
         </ModalBody>
-
-        <ModalFooter>
-        </ModalFooter>
         </ModalContent>
         </Modal>
         </div>

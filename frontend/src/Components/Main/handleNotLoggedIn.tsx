@@ -16,7 +16,6 @@ function getCookie(name: string): string | null {
 }
 
 export function HandleNotLoggedIn() {
-    console.log(getCookie("UUID"))
     const isLoggedIn = useSelector((state: RootStateOrAny) => state.isLoggedIn)
     const UUID = getCookie("UUID")
 
