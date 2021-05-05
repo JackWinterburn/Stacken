@@ -6,18 +6,13 @@ import Markdown from 'react-markdown'
 import { Card } from "../../types"
 import { 
     Container, 
-    Table,
-    TableCaption, 
-    Thead,
-    Tr,
-    Th,
-    Td,
-    Tbody,
     Tag,
     Breadcrumb,
     BreadcrumbItem,
     Box,
-    Flex
+    Flex,
+    Button,
+    Text
 } from "@chakra-ui/react"
 import { getEntity } from "../../api/getEntity"
 import { useParams, Link } from "react-router-dom"
@@ -27,6 +22,9 @@ function PracticeCards() {
     const rehypeHighlight = require("rehype-highlight")
     const { sectionTitle, sectionID, deckTitle, deckID } = useParams<{sectionTitle: string, sectionID: string, deckTitle: string, deckID: string}>()
     const [cards, setCards] = useState<Card[]>()
+    const [cardCounter, setCardCounter] = useState(0) // used to keep track of which card the user is on
+    const [cardProgress, setCardProgress] = useState<"Front" | "Back">("Front")
+    const [deckCompleted, setDeckCompleted] = useState(false)
 
     useEffect(() => {
         getEntity("deck", deckID).then(resp => setCards(resp.Cards))
@@ -40,7 +38,28 @@ function PracticeCards() {
         return breadCrumbItem
     }
 
+    function ensureValidDeck() {
+        // TODO: add a loading spinner here to improve UX
+        if (cards === undefined) return "Cards is undefined"
+        else if (cards.length < 1) return "No cards are in this deck yet."
+        else return cards[cardCounter][cardProgress]
+    }
+
+    function proceed() {        
+        if (cards !== undefined && cardCounter === cards.length - 1 && cardProgress === "Back") {
+            setDeckCompleted(true)
+            return
+        }
+
+        if (cardProgress === "Front") setCardProgress("Back")
+        else {
+            setCardProgress("Front")
+            setCardCounter(cardCounter + 1)
+        }
+    }
+
     return (
+        cards === undefined ? <Text>No cards for you</Text>:
         <Container textAlign="center">
         <Flex direction="column">
         <Tag size="sm" mb="5" borderRadius="full" mt="10">
@@ -64,33 +83,34 @@ function PracticeCards() {
         </Tag>
         </Flex>
 
-        <Box mt="6" borderWidth="thin" borderRadius="lg" boxShadow="lg">
-        <Table variant="striped" >
-            <TableCaption>Cards</TableCaption>
-            <Thead>
-                <Tr>
-                <Th>Front</Th>
-                <Th>Back</Th>
-                </Tr>
-            </Thead>
-            <Tbody>
-                {cards?.map((card, idx) => (
-                <Tr key={idx}>
-                <Td>
-                    <Markdown 
-                        remarkPlugins={[gfm]} 
-                        rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Front}</Markdown>
-                </Td>
-                <Td>
-                    <Markdown 
-                        remarkPlugins={[gfm]} 
-                        rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>{card.Back}</Markdown>
-                </Td>
-                </Tr>
-                ))}
-            </Tbody>
-        </Table>
+        {deckCompleted?
+        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" textAlign="left">
+            <Text>You have finished the deck!</Text>
+            <Link to={`/${sectionTitle}/${sectionID}`} className="mlink"> Back to sections page.</Link>
+        </Box> 
+        :         
+        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" textAlign="left">
+        <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
+        <Box id="front" textAlign="left" p="25px">
+            <Markdown
+                className="remark"
+                remarkPlugins={[gfm]} 
+                rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
+                    {cards[cardCounter].Front}
+            </Markdown>
         </Box>
+
+        <Box id="back" textAlign="left" p="25px" filter={cardProgress === "Front"? "blur(5px)" : "blur(0)"}>
+            <Markdown
+                className="remark"
+                remarkPlugins={[gfm]} 
+                rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
+                    {cards[cardCounter].Back}
+            </Markdown>
+        </Box>
+        <Button onClick={proceed} m="3">{cardProgress === "Front"? "Show Back" : "Next Card"}</Button>
+        </Box>
+        }
         </Container>
     )
 }

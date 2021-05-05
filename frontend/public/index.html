@@ -13,14 +13,43 @@
     <title>Stacken</title>
 
     <style>
+      :root {
+        --tableBorderColor: rgba(128, 128, 128, 0.719);
+      }
       h1 {
         font-size: 2rem !important;
+        line-height: 2.2rem !important;
       }      
       h2 {
         font-size: 1.6rem !important;
+        line-height: 1.8rem !important;
       }
       h3 {
         font-size: 1.3rem !important;
+        line-height: 1.5rem !important;
+      }
+      table{
+        border: 1px solid var(--tableBorderColor);
+        border-radius: 5px !important;
+      }
+      th {
+        padding: 4px;
+        border-right: 1px solid var(--tableBorderColor);
+        background-color: rgba(128, 128, 128, 0.199);
+      }
+      tr {
+        padding: 4px;
+        border: 1px solid var(--tableBorderColor);
+      }
+      td {
+        padding: 4px;
+        border-right: 1px solid var(--tableBorderColor);
+        border-left: 1px solid var(--tableBorderColor);
+        border-radius: 10px !important
+      }
+      hr {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important
       }
     </style>
   </head>

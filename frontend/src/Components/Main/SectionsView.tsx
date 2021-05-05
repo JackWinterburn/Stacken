@@ -45,9 +45,10 @@ export function SectionsView() {
             <Flex direction="row" justifyContent="space-between" key={section.ID}>
             <Link to={`/${section.Title}/${section.ID}`}>
             <Box
-                p="0.5"
+                p="3px"
                 textAlign="left"
-                _hover={{ textDecor: "underline" }}
+                borderRadius="sm"
+                _hover={{ background: "rgba(104, 104, 104, 0.3)", textDecor: "underline" }}
                 key={section.ID}
                 >
                 <Text>

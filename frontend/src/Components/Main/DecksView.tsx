@@ -96,7 +96,11 @@ function DecksView() {
             {decks.map((deck: Deck) => (
             <Flex direction="row" justifyContent="space-between" key={deck.ID}>
             <Link to={`/${sectionTitle}/${sectionID}/${deck.Title}/${deck.ID}`}>
-            <Box>
+            <Box
+                p="3px"
+                borderRadius="sm"
+                _hover={{ background: "rgba(104, 104, 104, 0.3)", textDecor: "underline" }}
+>
             <Text>{deck.Title}</Text>
             </Box>
             </Link>

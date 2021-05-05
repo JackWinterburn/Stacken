@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Redirect } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { signout } from "../../actions"
 import {
@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react"
 
 function Logout() {
+    const history = useHistory()
     const [redirect, setRedirect] = useState({
         to: "",
         go: false
@@ -23,6 +24,7 @@ function Logout() {
     const dispatch = useDispatch()
 
     function logout() {
+        // force all personalised cookies to expire (and be deleted) by setting them to a past date
         document.cookie = "authToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC"
         document.cookie = "UUID=;expires=Thu, 01 Jan 1970 00:00:00 UTC"
         dispatch(signout())
@@ -34,7 +36,7 @@ function Logout() {
     })
 
     return (
-        redirect.go ? <Redirect to={redirect.to}/> :
+        redirect.go ? <Redirect to={"/login"}/> :
         <div>
         <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -46,7 +48,7 @@ function Logout() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => setRedirect({to: "/", go: true})}>
+            <Button colorScheme="blue" mr={3} onClick={() => history.goBack()}>
               Cancel
             </Button>
             <Button colorScheme="red" onClick={() => logout()}>Yes, log me out</Button>
