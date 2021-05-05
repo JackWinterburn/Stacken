@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import gfm from "remark-gfm"
 import rehypeSanitize from "rehype-sanitize"
 import rehypeRaw from "rehype-raw"
@@ -13,6 +13,7 @@ import {
     Flex,
     Heading,
     Button,
+    VStack,
     Text
 } from "@chakra-ui/react"
 import { getEntity } from "../../api/getEntity"
@@ -26,10 +27,20 @@ function PracticeCards() {
     const [cardCounter, setCardCounter] = useState(0) // used to keep track of which card the user is on
     const [cardProgress, setCardProgress] = useState<"Front" | "Back">("Front")
     const [deckCompleted, setDeckCompleted] = useState(false)
+    const btnRef = useRef<any>()
 
     useEffect(() => {
         getEntity("deck", deckID).then(resp => setCards(resp.Cards))
-    }, [deckID])
+        document.addEventListener("keydown", keyboardHandler)
+        return () => { document.removeEventListener("keydown", keyboardHandler) }
+    }, [])
+
+    // allow the user to proceed through cards when either the enter or space key is pressed
+    function keyboardHandler(e: KeyboardEvent) {
+        if(e.key===" " || e.key==="ArrowRight") {
+            btnRef.current.click()
+        }
+    }
 
     function shortenBreadcrumbItem(breadCrumbItem: string) {
         if (breadCrumbItem.length > 25) {
@@ -85,13 +96,15 @@ function PracticeCards() {
         </Flex>
 
         {deckCompleted?
-        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" textAlign="left">
+        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" >
             <Heading>You have finished the deck!</Heading>
             <Link to={`/${sectionTitle}/${sectionID}`} className="mlink"> Back to sections page.</Link>
         </Box> 
         :         
-        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" textAlign="left">
+        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
+        <VStack h="19em" overflowY="scroll">
+
         <Box id="front" textAlign="left" p="25px">
             <Markdown
                 className="remark"
@@ -109,7 +122,8 @@ function PracticeCards() {
                     {cards[cardCounter].Back}
             </Markdown>
         </Box>
-        <Button onClick={proceed} m="3">{cardProgress === "Front"? "Show Back" : "Next Card"}</Button>
+        </VStack>
+        <Button ref={btnRef} onClick={proceed} m="3">{cardProgress === "Front"? "Show Back" : "Next Card"}</Button>
         </Box>
         }
         </Container>
