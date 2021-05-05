@@ -11,6 +11,7 @@ import {
     BreadcrumbItem,
     Box,
     Flex,
+    Heading,
     Button,
     Text
 } from "@chakra-ui/react"
@@ -85,7 +86,7 @@ function PracticeCards() {
 
         {deckCompleted?
         <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" textAlign="left">
-            <Text>You have finished the deck!</Text>
+            <Heading>You have finished the deck!</Heading>
             <Link to={`/${sectionTitle}/${sectionID}`} className="mlink"> Back to sections page.</Link>
         </Box> 
         :         
