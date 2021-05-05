@@ -38,6 +38,8 @@ function PracticeCards() {
     // allow the user to proceed through cards when either the enter or space key is pressed
     function keyboardHandler(e: KeyboardEvent) {
         if(e.key===" " || e.key==="ArrowRight") {
+            btnRef.current.disabled=true
+            btnRef.current.disabled=false
             btnRef.current.click()
         }
     }
