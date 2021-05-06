@@ -5,7 +5,6 @@ import {
     ModalContent,
     ModalHeader,
     ModalBody,
-    ModalFooter,
     ModalCloseButton,
     Button,
     FormControl,
@@ -13,7 +12,6 @@ import {
     Textarea,
     Kbd,
     Box,
-    Text,
     VStack
 } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"

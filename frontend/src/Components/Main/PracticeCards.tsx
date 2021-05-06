@@ -14,6 +14,7 @@ import {
     Heading,
     Button,
     VStack,
+    Spinner,
     Text
 } from "@chakra-ui/react"
 import { getEntity } from "../../api/getEntity"
@@ -27,10 +28,11 @@ function PracticeCards() {
     const [cardCounter, setCardCounter] = useState(0) // used to keep track of which card the user is on
     const [cardProgress, setCardProgress] = useState<"Front" | "Back">("Front")
     const [deckCompleted, setDeckCompleted] = useState(false)
+    const [dataFetched, setDataFetched] = useState(false)
     const btnRef = useRef<any>()
 
     useEffect(() => {
-        getEntity("deck", deckID).then(resp => setCards(resp.Cards))
+        getEntity("deck", deckID).then(resp => {setCards(resp.Cards); setDataFetched(true)})
         document.addEventListener("keydown", keyboardHandler)
         return () => { document.removeEventListener("keydown", keyboardHandler) }
     }, [deckID])
@@ -56,9 +58,7 @@ function PracticeCards() {
 
     function ensureValidDeck() {
         // TODO: add a loading spinner here to improve UX
-        if (cards === undefined) return "Cards is undefined"
-        else if (cards.length < 1) return "No cards are in this deck yet."
-        else return cards[cardCounter][cardProgress]
+        if (cards === undefined) return "No cards are in this deck yet"
     }
 
     function proceed() {        
@@ -74,8 +74,37 @@ function PracticeCards() {
         }
     }
 
-    return (
-        cards === undefined ? <Text>No cards for you</Text>:
+    if (cards === undefined || cards[cardCounter] === undefined) {
+        return (
+        <Container textAlign="center">
+        <Flex direction="column">
+        <Tag size="sm" mb="5" borderRadius="full" mt="10">
+        <Breadcrumb textAlign="left">
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to="/">
+                Home
+            </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to={`/${sectionTitle}/${sectionID}`}>
+                { shortenBreadcrumbItem(sectionTitle) }
+            </Link> 
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to={`/${sectionTitle}/${sectionID}/${deckTitle}/${deckID}`}>
+                { shortenBreadcrumbItem(deckTitle) }
+            </Link> 
+            </BreadcrumbItem>
+        </Breadcrumb>
+        </Tag>
+        </Flex>
+        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="center">
+        {dataFetched? <Heading>There are no cards in this deck yet...</Heading> : <Spinner />}            
+        </Box>
+        </Container>
+        )
+    } else {
+        return (
         <Container textAlign="center">
         <Flex direction="column">
         <Tag size="sm" mb="5" borderRadius="full" mt="10">
@@ -131,7 +160,9 @@ function PracticeCards() {
         </Box>
         }
         </Container>
-    )
+        )
+    }
+        
 }
 
 export default PracticeCards
