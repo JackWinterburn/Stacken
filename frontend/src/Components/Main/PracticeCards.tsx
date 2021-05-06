@@ -33,14 +33,16 @@ function PracticeCards() {
         getEntity("deck", deckID).then(resp => setCards(resp.Cards))
         document.addEventListener("keydown", keyboardHandler)
         return () => { document.removeEventListener("keydown", keyboardHandler) }
-    }, [])
+    }, [deckID])
 
     // allow the user to proceed through cards when either the enter or space key is pressed
     function keyboardHandler(e: KeyboardEvent) {
         if(e.key===" " || e.key==="ArrowRight") {
-            btnRef.current.disabled=true
-            btnRef.current.disabled=false
-            btnRef.current.click()
+            try {
+                btnRef.current.disabled=true
+                btnRef.current.disabled=false
+                btnRef.current.click()
+            } catch(e) {return}
         }
     }
 
