@@ -5,6 +5,7 @@ import Register from "./Components/Register"
 import Main from "./Components/Main"
 import DecksView from "./Components/Main/DecksView"
 import CardsView from "./Components/Main/CardsView"
+import EditCardsView from "./Components/Main/EditCardsView"
 import PracticeCards from "./Components/Main/PracticeCards"
 import CookieConsent  from "react-cookie-consent"
 import { 
@@ -51,6 +52,12 @@ function App() {
                     <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID/cards">
                         <PracticeCards />
                     </Route>
+                    
+                    {/* Edit Cards page: used CRUD cards in each deck */}
+                    <Route path="/:sectionTitle/:sectionID/:deckTitle/:deckID/edit">
+                        <EditCardsView />
+                    </Route>
+
 
                     {/* User and Auth routes */}
                     <Route exact path="/login">

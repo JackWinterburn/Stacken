@@ -48,7 +48,7 @@ export function SectionsView() {
                 p="3px"
                 textAlign="left"
                 borderRadius="sm"
-                _hover={{ background: "rgba(104, 104, 104, 0.3)", textDecor: "underline" }}
+                _hover={{ textDecor: "underline" }}
                 key={section.ID}
                 >
                 <Text>

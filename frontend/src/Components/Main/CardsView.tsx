@@ -4,6 +4,7 @@ import { Heading,
     Container,
     Box, 
     Button, 
+    ButtonGroup,
     Tag,
     Badge,
     Flex,
@@ -62,10 +63,19 @@ function CardsView() {
             </Heading>
             <Badge variant="solid" mb="3">{amntOfCardsInDeck} cards in this deck</Badge>
             </Box>
+            <ButtonGroup isAttached variant="outline">
             <Link to={`${location.pathname}/cards`}>
-            <Button m="3" colorScheme="green">Start deck</Button>
+            <Button borderRightRadius="0">
+                Start deck
+            </Button>
             </Link>
-            <Button m="3" colorScheme="blue" onClick={onOpen}>Add Cards</Button>
+            <Button  borderRadius="0" onClick={onOpen}>Add Cards</Button>
+            <Link to={`${location.pathname}/edit`}>
+            <Button borderLeftRadius="0">
+                Edit deck
+            </Button>
+            </Link>
+            </ButtonGroup>
         </Box>
         <AddCardsModal isOpen={isOpen} onClose={onClose} setAmntOfCardsInDeck={setAmntOfCardsInDeck}/>
         </Container>

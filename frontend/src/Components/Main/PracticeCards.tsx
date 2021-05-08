@@ -15,6 +15,7 @@ import {
     Button,
     VStack,
     Spinner,
+    Divider,
     Text
 } from "@chakra-ui/react"
 import { getEntity } from "../../api/getEntity"
@@ -32,7 +33,7 @@ function PracticeCards() {
     const btnRef = useRef<any>()
 
     useEffect(() => {
-        getEntity("deck", deckID).then(resp => {setCards(resp.Cards); setDataFetched(true)})
+        getEntity("deck", deckID).then(resp => {setTimeout(() => {setCards(resp.Cards); setDataFetched(true)}, 200)})
         document.addEventListener("keydown", keyboardHandler)
         return () => { document.removeEventListener("keydown", keyboardHandler) }
     }, [deckID])
@@ -137,8 +138,8 @@ function PracticeCards() {
         <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
         <VStack h="19em" overflowY="scroll">
-
-        <Box id="front" textAlign="left" p="25px">
+        Front:
+        <Box id="front" textAlign="left" p="25px" minH="35%" >
             <Markdown
                 className="remark"
                 remarkPlugins={[gfm]} 
@@ -146,7 +147,8 @@ function PracticeCards() {
                     {cards[cardCounter].Front}
             </Markdown>
         </Box>
-
+        <Divider opacity="1" />
+        Back:
         <Box id="back" textAlign="left" p="25px" filter={cardProgress === "Front"? "blur(5px)" : "blur(0)"}>
             <Markdown
                 className="remark"

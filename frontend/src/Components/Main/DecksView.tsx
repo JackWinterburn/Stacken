@@ -99,7 +99,7 @@ function DecksView() {
             <Box
                 p="3px"
                 borderRadius="sm"
-                _hover={{ background: "rgba(104, 104, 104, 0.3)", textDecor: "underline" }}
+                _hover={{ textDecor: "underline" }}
 >
             <Text>{deck.Title}</Text>
             </Box>
