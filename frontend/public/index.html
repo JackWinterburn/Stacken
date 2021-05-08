@@ -22,15 +22,20 @@
       .remark > h1 {
         font-size: 2rem !important;
         line-height: 2.2rem !important;
+        margin-top: 0.4em;
+        margin-bottom: 0.4em;
       }      
       .remark > h2 {
         font-size: 1.6rem !important;
         line-height: 1.8rem !important;
-        text-align: left
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
       }
       .remark > h3 {
         font-size: 1.3rem !important;
         line-height: 1.5rem !important;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
       }
       .remark > table{
         border: 1px solid var(--tableBorderColor);
@@ -63,10 +68,33 @@
       }
       .remark > p > code {
         padding: 0.3em;
+        tab-size: 4;
         font-family: 'Courier New', Courier, monospace;
         font-weight: 400;
         border-radius: 5px;
         background-color: rgba(128, 128, 128, 0.1);
+      }
+      .remark > pre {
+        max-width: 25em;
+        overflow-x: scroll;
+        padding: 0.3em;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 400;
+        border-radius: 5px;
+        background: rgba(128, 128, 128, 0.1);
+      }
+
+      @media only screen and (max-width: 517px) {
+        .remark > pre {max-width: 22em;}
+      } 
+      @media only screen and (max-width: 470px) {
+        .remark > pre {max-width: 16em;}
+      }
+      @media only screen and (max-width: 400px) {
+        .remark > pre {max-width: 14em;}
+      }
+      @media only screen and (max-width: 373px) {
+        .remark > pre {max-width: 12em;}
       }
     </style>
   </head>

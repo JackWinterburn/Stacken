@@ -144,7 +144,7 @@ function PracticeCards() {
         :         
         <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
-        <VStack h="19em" overflowY="scroll">
+        <VStack h="19em" overflow="scroll">
         <Box id="front" textAlign="left" p="25px" >
             <Markdown
                 className="remark"
