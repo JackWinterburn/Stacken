@@ -16,6 +16,9 @@
       :root {
         --tableBorderColor: rgba(128, 128, 128, 0.719);
       }
+      .remark {
+        min-height: 35% !important;
+      }
       .remark > h1 {
         font-size: 2rem !important;
         line-height: 2.2rem !important;
@@ -23,6 +26,7 @@
       .remark > h2 {
         font-size: 1.6rem !important;
         line-height: 1.8rem !important;
+        text-align: left
       }
       .remark > h3 {
         font-size: 1.3rem !important;
@@ -50,8 +54,19 @@
         margin-top: 10px !important;
         margin-bottom: 10px !important
       }
-      .task-list-item::marker {
+      .remark > blockquote {
+        padding: 0.45em;
+        border-left: 2px solid rgba(128, 128, 128, 0.199) !important
+      }
+      .remark > ul > .task-list-item::marker {
         font-size: 0;
+      }
+      .remark > p > code {
+        padding: 0.3em;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 400;
+        border-radius: 5px;
+        background-color: rgba(128, 128, 128, 0.1);
       }
     </style>
   </head>

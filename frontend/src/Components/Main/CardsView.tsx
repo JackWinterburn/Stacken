@@ -63,19 +63,17 @@ function CardsView() {
             </Heading>
             <Badge variant="solid" mb="3">{amntOfCardsInDeck} cards in this deck</Badge>
             </Box>
-            <ButtonGroup isAttached variant="outline">
             <Link to={`${location.pathname}/cards`}>
-            <Button borderRightRadius="0">
+            <Button m="1" size="md" >
                 Start deck
             </Button>
             </Link>
-            <Button  borderRadius="0" onClick={onOpen}>Add Cards</Button>
+            <Button m="1" size="md" onClick={onOpen}>Add Cards</Button>
             <Link to={`${location.pathname}/edit`}>
-            <Button borderLeftRadius="0">
+            <Button m="1" size="md" >
                 Edit deck
             </Button>
             </Link>
-            </ButtonGroup>
         </Box>
         <AddCardsModal isOpen={isOpen} onClose={onClose} setAmntOfCardsInDeck={setAmntOfCardsInDeck}/>
         </Container>

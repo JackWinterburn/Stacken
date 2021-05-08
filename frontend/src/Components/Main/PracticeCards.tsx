@@ -145,11 +145,10 @@ function PracticeCards() {
         <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
         <VStack h="19em" overflowY="scroll">
-        Front:
-        <Box id="front" textAlign="left" p="25px" minH="35%" >
+        <Box id="front" textAlign="left" p="25px" >
             <Markdown
                 className="remark"
-                remarkPlugins={[gfm]} 
+                remarkPlugins={[gfm]}
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
                     {insertHighlightTags(cards[cardCounter].Front)}
             </Markdown>
