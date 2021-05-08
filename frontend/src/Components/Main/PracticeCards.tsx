@@ -57,6 +57,13 @@ function PracticeCards() {
         return breadCrumbItem
     }
 
+    // replace "[[" and "]]" in any of the inputs with html mark tags for highlighting
+    function insertHighlightTags(str: string) {
+        str = str.replaceAll("[[", "<mark>")
+        str = str.replaceAll("]]", "</mark>")
+        return str
+    }
+
     function ensureValidDeck() {
         // TODO: add a loading spinner here to improve UX
         if (cards === undefined) return "No cards are in this deck yet"
@@ -144,7 +151,7 @@ function PracticeCards() {
                 className="remark"
                 remarkPlugins={[gfm]} 
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
-                    {cards[cardCounter].Front}
+                    {insertHighlightTags(cards[cardCounter].Front)}
             </Markdown>
         </Box>
         <Divider opacity="1" />
@@ -154,7 +161,7 @@ function PracticeCards() {
                 className="remark"
                 remarkPlugins={[gfm]} 
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
-                    {cards[cardCounter].Back}
+                    {insertHighlightTags(cards[cardCounter].Back)}
             </Markdown>
         </Box>
         </VStack>

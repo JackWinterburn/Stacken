@@ -45,20 +45,10 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
         })
     }
 
-    // replace "[[" and "]]" in any of the inputs with html mark tags for highlighting
-    function insertHighlightTags(str: string) {
-        str = str.replaceAll("[[", "<mark>")
-        str = str.replaceAll("]]", "</mark>")
-        return str
-    }
-    
     async function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
         if(e !== undefined) {
             e.preventDefault()
-            await postEntity("card", {
-                DeckID: Number(deckID),
-                Front: insertHighlightTags(inputState.front),
-                Back: insertHighlightTags(inputState.back)})
+            await postEntity("card", {DeckID: Number(deckID), Front: inputState.front, Back: inputState.back})
             setInputState({ front: "", back: "" })
             frontTextareaRef.current.focus()
             setAmntOfCardsInDeck(prevState => prevState !== undefined ? prevState + 1 : undefined)
