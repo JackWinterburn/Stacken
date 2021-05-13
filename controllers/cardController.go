@@ -44,6 +44,19 @@ func CreateCard(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdCard)
 }
 
+func UpdateCard(w http.ResponseWriter, r *http.Request) {
+	var oldCard models.Card
+
+	newCard := &models.Card{}
+	json.NewDecoder(r.Body).Decode(newCard)
+
+	database.First(&oldCard, newCard.ID)
+
+	oldCard.Front = newCard.Front
+	oldCard.Back = newCard.Back
+	database.Save(&oldCard)
+}
+
 func DeleteCard(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 

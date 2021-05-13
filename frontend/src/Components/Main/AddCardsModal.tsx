@@ -85,7 +85,7 @@ function AddCardsModal({isOpen, onClose, setAmntOfCardsInDeck}: {isOpen: boolean
 
                 <VStack float="right">
                     <Box><Kbd>ctr</Kbd> + <Kbd>Enter</Kbd></Box>
-                    <Button ref={submitRef} mt="6" type="submit" variant="outline" colorScheme="blue">Add Card</Button>  
+                    <Button ref={submitRef} mt="6" type="submit" colorScheme="blue">Add Card</Button>  
                 </VStack>
             </form>
         </ModalBody>

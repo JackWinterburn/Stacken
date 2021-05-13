@@ -35,6 +35,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/create/card", controllers.CreateCard).Methods("POST")
 	r.HandleFunc("/get/cards/{id}", controllers.GetCards).Methods("GET")
 	r.HandleFunc("/get/card/{id}", controllers.GetCard).Methods("GET")
+	r.HandleFunc("/update/card", controllers.UpdateCard).Methods("POST")
 	r.HandleFunc("/delete/card/{id}", controllers.DeleteCard).Methods("POST")
 
 	c := cors.New(cors.Options{
