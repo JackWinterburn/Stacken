@@ -155,9 +155,15 @@ function PracticeCards() {
         </Box>
         <Divider opacity="1" />
         Back:
-        <Box id="back" textAlign="left" p="25px" filter={cardProgress === "Front"? "blur(5px)" : "blur(0)"}>
+        <Box 
+            id="back" 
+            textAlign="left" 
+            p="25px" 
+            filter={cardProgress === "Front"? "blur(5px)" : "blur(0)"}
+            cursor={cardProgress === "Front"? "not-allowed" : "default"}
+            >
             <Markdown
-                className="remark"
+                className={`remark ${cardProgress === "Front"? "remdisabled" : ""}`}
                 remarkPlugins={[gfm]} 
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
                     {insertHighlightTags(cards[cardCounter].Back)}
