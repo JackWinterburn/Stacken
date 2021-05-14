@@ -45,16 +45,18 @@ func CreateCard(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateCard(w http.ResponseWriter, r *http.Request) {
-	var oldCard models.Card
+	var card models.Card
+	var updatedCard models.Card
 
-	newCard := &models.Card{}
-	json.NewDecoder(r.Body).Decode(newCard)
+	err := json.NewDecoder(r.Body).Decode(&updatedCard)
+	if err != nil {
+		fmt.Print(err)
+	}
 
-	database.First(&oldCard, newCard.ID)
-
-	oldCard.Front = newCard.Front
-	oldCard.Back = newCard.Back
-	database.Save(&oldCard)
+	database.First(&card, updatedCard.ID)
+	card.Front = updatedCard.Front
+	card.Back = updatedCard.Back
+	database.Save(&card)
 }
 
 func DeleteCard(w http.ResponseWriter, r *http.Request) {

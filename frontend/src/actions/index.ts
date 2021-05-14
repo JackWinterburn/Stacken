@@ -45,3 +45,17 @@ export const resetDecks = (): { type: string, payload: any[] } => {
         }]
     }
 }
+
+export const alterEditingCards = (payload: any[]): { type: string, payload: any[] } => {
+    return {
+        type: "ALTER_EDITING_CARDS",
+        payload
+    }
+}
+
+export const clearEditingCards = (): { type: string, payload: any[] } => {
+    return {
+        type: "CLEAR_EDITING_CARDS",
+        payload: []
+    }
+}
