@@ -1,4 +1,5 @@
 import DarkModeSwitch from '../DarkModeSwitch'
+import Header from "../Header"
 import { useState, useEffect } from 'react'
 import {
     Container,
@@ -64,6 +65,8 @@ function Settings() {
     }
 
     return (
+        <>
+        <Header />
         <Container mt={10}>
             <Flex direction="column">
             <Tag size="sm" mb="5" borderRadius="full">
@@ -92,10 +95,10 @@ function Settings() {
             <Input defaultValue={inputState.Name} mb={2} onChange={onChange} name="Name" />
 
             <FormLabel>Email</FormLabel>
-            <Input defaultValue={inputState.Email} mb={2} onChange={onChange} name="Email" />
+            <Input type="email" defaultValue={inputState.Email} mb={2} onChange={onChange} name="Email" />
 
             <FormLabel>Profile Picture URL</FormLabel>
-            <Input defaultValue={inputState.ProfilePictureURL} mb={2} onChange={onChange} name="ProfilePictureURL" />
+            <Input type="url" defaultValue={inputState.ProfilePictureURL} mb={2} onChange={onChange} name="ProfilePictureURL" />
 
             <Button mt={3} variant="outline" colorScheme="green" w="100%" type="submit" isDisabled={!ifInfoHasChanged}>Save</Button>
             </form>
@@ -106,6 +109,7 @@ function Settings() {
             <FormLabel mt={2}>Dark Mode</FormLabel>
             <DarkModeSwitch />
         </Container>
+        </>
     )
 }
 

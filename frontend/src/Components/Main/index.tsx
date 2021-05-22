@@ -8,6 +8,8 @@ import { SectionsView } from "./SectionsView"
 import {
     Container,
 } from "@chakra-ui/react"
+import Header from "../Header"
+
 
 
 function Main() {
@@ -25,7 +27,7 @@ function Main() {
         <div>
             {/* Redirect user to login if they are not logged in */}
             {HandleNotLoggedIn()}
-            
+            <Header />
             <Container textAlign="center">
 
             <SectionsView />

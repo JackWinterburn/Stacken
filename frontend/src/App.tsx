@@ -1,4 +1,3 @@
-import Header from "./Components/Header"
 import Login from "./Components/Login"
 import Logout from "./Components/Logout"
 import Register from "./Components/Register"
@@ -22,7 +21,7 @@ import "./Scss/App.scss"
 
 function App() {
     const dispatch = useDispatch()
-    
+
     // TODO: This does not work anymore because of react cookie consent, please fix this 
     //       so that it checks specifically for the UUID and user Token
     if (document.cookie === "") dispatch(signout())
@@ -31,8 +30,6 @@ function App() {
     return (
         <>
             <Router>
-                <Header />
-
                 {/* TODO: Move the Switch into its own component */}
                 <Switch>
                     {/* Home page */}
