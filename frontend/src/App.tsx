@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+import Header from "./Components/Header"
 import Login from "./Components/Login"
 import Logout from "./Components/Logout"
 import Register from "./Components/Register"
@@ -21,15 +23,36 @@ import "./Scss/App.scss"
 
 function App() {
     const dispatch = useDispatch()
+    const [showPfp, setShowPfp] = useState(false)
+
+    useEffect(() => {
+        if(contains(window.location.href, ["register", "login", "logout"])) {
+            setShowPfp(true)
+        } else { setShowPfp(false) }
+    }, [])
 
     // TODO: This does not work anymore because of react cookie consent, please fix this 
     //       so that it checks specifically for the UUID and user Token
     if (document.cookie === "") dispatch(signout())
     else dispatch(signin())
 
+    function contains(target: string, pattern: string[]) {
+        let val = true
+        pattern.forEach((word) => {
+            if(target.includes(word)) val = false
+        });
+        return val
+    }
+
     return (
         <>
             <Router>
+                {showPfp ? 
+                <Header />
+                : 
+                <></>
+                }
+
                 {/* TODO: Move the Switch into its own component */}
                 <Switch>
                     {/* Home page */}

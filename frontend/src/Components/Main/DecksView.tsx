@@ -154,7 +154,7 @@ function DecksView() {
 
                 <MenuList>
                 <MenuItem onClick={() => onModalOpen(deck)}>
-                    Edit Deck
+                    Edit Title
                 </MenuItem>
                 <MenuItem onClick={() => onDelete(deck.ID)}>
                     Delete Deck
@@ -167,7 +167,7 @@ function DecksView() {
             <Modal size="sm" isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Editing {editingDeck?.Title}</ModalHeader>
+                    <ModalHeader>Editing <strong>{editingDeck?.Title}</strong></ModalHeader>
                 <ModalCloseButton />
                 <ModalBody >
                     <form action="" onSubmit={onSubmit}>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import DarkModeSwitch from "./DarkModeSwitch"
 import { 
     Menu,
     MenuButton,
@@ -28,7 +27,7 @@ function Header() {
     console.log(userInfo)
     
     function AvatarComp() {
-        if(userInfo?.ProfilePictureURL != "") {
+        if(userInfo?.ProfilePictureURL !== "") {
             return (
                 <Avatar size="md" name={userInfo?.Name} src={userInfo?.ProfilePictureURL} />
             )

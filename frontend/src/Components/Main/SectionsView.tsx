@@ -103,7 +103,7 @@ export function SectionsView() {
 
                 <MenuList>
                 <MenuItem onClick={() => onModalOpen(section)}>
-                    Edit Section
+                    Edit Title
                 </MenuItem>
                 <MenuItem onClick={() => onDelete(section.ID)}>
                     Delete Section
@@ -116,7 +116,7 @@ export function SectionsView() {
     <Modal size="sm" isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
         <ModalOverlay />
         <ModalContent>
-            <ModalHeader>Editing {editingSection?.Title}</ModalHeader>
+            <ModalHeader>Editing <strong>{editingSection?.Title}</strong></ModalHeader>
           <ModalCloseButton />
           <ModalBody >
               <form action="" onSubmit={onSubmit}>

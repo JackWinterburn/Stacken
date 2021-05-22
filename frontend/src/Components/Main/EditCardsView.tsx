@@ -21,7 +21,6 @@ import {
     Textarea,
     FormLabel,
     Tag,
-    Badge,
     Flex,
     Breadcrumb,
     BreadcrumbItem,

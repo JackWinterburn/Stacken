@@ -85,8 +85,8 @@ function PracticeCards() {
     if (cards === undefined || cards[cardCounter] === undefined) {
         return (
         <Container textAlign="center">
-        <Flex direction="column">
-        <Tag size="sm" mb="5" borderRadius="full" mt="10">
+        <Flex direction="column" mt="10">
+        <Tag size="sm" borderRadius="full" >
         <Breadcrumb textAlign="left">
             <BreadcrumbItem>
             <Link className="bdcm-link" to="/">
@@ -114,8 +114,8 @@ function PracticeCards() {
     } else {
         return (
         <Container textAlign="center">
-        <Flex direction="column">
-        <Tag size="sm" mb="5" borderRadius="full" mt="10">
+        <Flex direction="column" mt="10">
+        <Tag size="sm" mb="5" borderRadius="full">
         <Breadcrumb textAlign="left">
             <BreadcrumbItem>
             <Link className="bdcm-link" to="/">

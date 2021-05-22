@@ -1,5 +1,4 @@
 import DarkModeSwitch from '../DarkModeSwitch'
-import Header from "../Header"
 import { useState, useEffect } from 'react'
 import {
     Container,
@@ -66,7 +65,6 @@ function Settings() {
 
     return (
         <>
-        <Header />
         <Container mt={10}>
             <Flex direction="column">
             <Tag size="sm" mb="5" borderRadius="full">

@@ -5,9 +5,13 @@ $drag-icon: url("../drag_icon.svg");
 }
 
 * ::-webkit-scrollbar{
-    width: 0.6em
+    width: 0.6em;
+    -ms-overflow-style: none;
 }
 
+* ::-webkit-scrollbar-corner {
+    display: none;
+}
 *::-webkit-scrollbar-thumb {
     background-color: rgba(104, 104, 104, 0.3);
     margin: 5px;
