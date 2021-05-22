@@ -7,6 +7,7 @@ import DecksView from "./Components/Main/DecksView"
 import CardsView from "./Components/Main/CardsView"
 import EditCardsView from "./Components/Main/EditCardsView"
 import PracticeCards from "./Components/Main/PracticeCards"
+import Settings from "./Components/Settings"
 import CookieConsent  from "react-cookie-consent"
 import { 
     BrowserRouter as Router,
@@ -58,6 +59,9 @@ function App() {
                         <EditCardsView />
                     </Route>
 
+                    <Route path="/settings">
+                        <Settings />
+                    </Route>
 
                     {/* User and Auth routes */}
                     <Route exact path="/login">

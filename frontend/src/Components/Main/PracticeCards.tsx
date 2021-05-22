@@ -145,7 +145,7 @@ function PracticeCards() {
         <Box mt="6" p="3" borderWidth="thin" borderRadius={3} boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
         <VStack h="19em" overflow="scroll">
-        <Box id="front" p="25px" fontSize="lg">
+        <Box id="front" p="25px">
             <Markdown
                 className="remark"
                 remarkPlugins={[gfm]}
@@ -154,11 +154,9 @@ function PracticeCards() {
             </Markdown>
         </Box>
         <Divider opacity="1" />
-        Back:
         <Box 
             id="back"
             p="25px"
-            fontSize="lg"
             filter={cardProgress === "Front"? "blur(10px)" : "blur(0)"}
             cursor={cardProgress === "Front"? "not-allowed" : "default"}
             >

@@ -19,7 +19,12 @@ import {
     useDisclosure,
     FormControl,
     Textarea,
-    FormLabel
+    FormLabel,
+    Tag,
+    Badge,
+    Flex,
+    Breadcrumb,
+    BreadcrumbItem,
 } from "@chakra-ui/react"
 import { Card } from "../../types"
 import { getEntity } from "../../api/getEntity"
@@ -77,6 +82,14 @@ function EditCardsView() {
         setIsChanged(true)
     }
 
+    function shortenBreadcrumbItem(breadCrumbItem: string) {
+        if (breadCrumbItem.length > 19) {
+            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 16) + "..."
+            return shortenedBreadCrumbItem
+        }
+        return breadCrumbItem
+    }
+
     async function onDelete(ID: number | undefined) {
         if(ID === undefined) return
         else {
@@ -100,6 +113,28 @@ function EditCardsView() {
 
     return (
         <Container textAlign="center">
+        <Flex direction="column" mt="10" h="100%">
+        <Tag size="sm" mb="5" borderRadius="full">
+        <Breadcrumb textAlign="left">
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to="/">
+                Home
+            </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to={`/${sectionTitle}/${sectionID}`}>
+                { shortenBreadcrumbItem(sectionTitle) }
+            </Link> 
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+            <Link className="bdcm-link" to={`/${sectionTitle}/${sectionID}/${deckTitle}/${deckID}`}>
+                { shortenBreadcrumbItem(deckTitle) }
+            </Link> 
+            </BreadcrumbItem>
+        </Breadcrumb>
+        </Tag>
+        </Flex>
+
         <Box mt="6" borderWidth="thin" borderRadius="sm" boxShadow="lg">
         <Table variant="striped" >
             <TableCaption placement="top">Cards</TableCaption>

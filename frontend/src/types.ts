@@ -1,12 +1,13 @@
 export type UserCreatedValue = {
-    CreatedAt: string;
-    DeletedAt: string;
-    Email:     string;
-    ID:        number;
-    Name:      string;
-    Password:  string;
-    Sections:  null | [];
-    UpdatedAt: string;
+    CreatedAt:         string;
+    DeletedAt:         string;
+    Email:             string;
+    ID:                number;
+    Name:              string;
+    Password:          string;
+    ProfilePictureURL: string;
+    Sections:          null | [];
+    UpdatedAt:         string;
 }
 
 // Used in "/api/register.ts"

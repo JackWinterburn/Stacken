@@ -1,34 +1,72 @@
-import { HStack, UnorderedList, ListItem } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 import DarkModeSwitch from "./DarkModeSwitch"
+import { 
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    Avatar,
+    Container,
+    Flex,
+    Box
+} from "@chakra-ui/react"
+import { Link } from "react-router-dom"
+import { getEntity } from "../api/getEntity"
+import { getUUID } from "./Main/getUUID"
+import { UserCreatedValue } from "../types"
 
 import "../Scss/Header.scss"
 
 function Header() {
+    const [userInfo, setUserInfo] = useState<UserCreatedValue>()
+
+    useEffect(() => {
+        if(getUUID()){
+            getEntity("user", getUUID()).then((resp) => setUserInfo(resp))
+        }
+    }, [])
+    console.log(userInfo)
+    
+    function AvatarComp() {
+        if(userInfo?.ProfilePictureURL != "") {
+            return (
+                <Avatar size="md" name={userInfo?.Name} src={userInfo?.ProfilePictureURL} />
+            )
+        } else if(userInfo?.ProfilePictureURL === "") {
+            return (
+                <Avatar size="md" name={userInfo?.Name} />
+            )
+        } else {
+            return (
+                <Avatar size="md" />
+            )
+        }
+    }
+
     return (
-        <nav className="navbar">
-            <UnorderedList className="nav-links">
-                <HStack>
-                    <ListItem className="nav-link">
-                        <Link to="/">Main</Link>
-                    </ListItem>
+        <Container p={5} >
+            <Box as="span" float="right" _hover={{ cursor: "pointer"}}>
 
-                    <ListItem className="nav-link">
-                        <Link to="/login">Login</Link>
-                    </ListItem>
+            <Menu>
+                <MenuButton as={Flex}>
+                <AvatarComp />
+                </MenuButton>
 
-                    <ListItem className="nav-link">
-                        <Link to="/register">Register</Link>
-                    </ListItem>
-
-                    <ListItem className="nav-link">
-                        <Link to="/logout">Logout</Link>
-                    </ListItem>
-                    
-                    <DarkModeSwitch />
-                </HStack>
-            </UnorderedList>
-            </nav>
+                <MenuList>
+                <Link to="/settings">
+                <MenuItem>
+                    Settings
+                </MenuItem>
+                </Link>
+                <Link to="/logout">
+                <MenuItem>
+                    Logout
+                </MenuItem>
+                </Link>
+                </MenuList>
+            </Menu>
+            </Box>
+        </Container>
     )
 }
 

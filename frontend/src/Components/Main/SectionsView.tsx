@@ -126,7 +126,7 @@ export function SectionsView() {
               </form>
           </ModalBody>
         </ModalContent>
-      </Modal>
+        </Modal>
 
         <PopoverForm entity="section" parentID={getUUID()} />
         </Flex>

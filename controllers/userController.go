@@ -131,3 +131,19 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(&user)
 }
+
+func UpdateUser(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	var updatedUser models.User
+
+	err := json.NewDecoder(r.Body).Decode(&updatedUser)
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	database.First(&user, updatedUser.ID)
+	user.Name = updatedUser.Name
+	user.Email = updatedUser.Email
+	user.ProfilePictureURL = updatedUser.ProfilePictureURL
+	database.Save(&user)
+}

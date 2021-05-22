@@ -35,8 +35,8 @@ function CardsView() {
 
     return (
         <Container textAlign="center">
-        <Flex direction="column">
-        <Tag size="sm" mb="5" borderRadius="full" mt="10">
+        <Flex direction="column" mt="10" h="100%">
+        <Tag size="sm" mb="5" borderRadius="full" >
         <Breadcrumb textAlign="left">
             <BreadcrumbItem>
             <Link className="bdcm-link" to="/">
