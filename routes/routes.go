@@ -30,6 +30,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/create/deck", controllers.CreateDeck).Methods("POST")
 	r.HandleFunc("/get/decks/{id}", controllers.GetDecks).Methods("GET")
 	r.HandleFunc("/get/deck/{id}", controllers.GetDeck).Methods("GET")
+	r.HandleFunc("/update/deck", controllers.UpdateDeck).Methods("POST")
 	r.HandleFunc("/delete/deck/{id}", controllers.DeleteDeck).Methods("POST")
 
 	// Card Routes

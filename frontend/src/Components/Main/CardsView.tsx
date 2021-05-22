@@ -26,8 +26,8 @@ function CardsView() {
     }, [deckID])
 
     function shortenBreadcrumbItem(breadCrumbItem: string) {
-        if (breadCrumbItem.length > 25) {
-            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 21) + "..."
+        if (breadCrumbItem.length > 19) {
+            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 16) + "..."
             return shortenedBreadCrumbItem
         }
         return breadCrumbItem

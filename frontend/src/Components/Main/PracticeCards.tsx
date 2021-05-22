@@ -50,8 +50,8 @@ function PracticeCards() {
     }
 
     function shortenBreadcrumbItem(breadCrumbItem: string) {
-        if (breadCrumbItem.length > 25) {
-            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 21) + "..."
+        if (breadCrumbItem.length > 19) {
+            let shortenedBreadCrumbItem = breadCrumbItem.substr(0, 16) + "..."
             return shortenedBreadCrumbItem
         }
         return breadCrumbItem
@@ -145,7 +145,7 @@ function PracticeCards() {
         <Box mt="6" p="3" borderWidth="thin" borderRadius={3} boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
         <VStack h="19em" overflow="scroll">
-        <Box id="front" textAlign="left" p="25px" width="100%" >
+        <Box id="front" p="25px" fontSize="lg">
             <Markdown
                 className="remark"
                 remarkPlugins={[gfm]}
@@ -156,16 +156,15 @@ function PracticeCards() {
         <Divider opacity="1" />
         Back:
         <Box 
-            id="back" 
-            textAlign="left" 
+            id="back"
             p="25px"
-            width="100%"
+            fontSize="lg"
             filter={cardProgress === "Front"? "blur(10px)" : "blur(0)"}
             cursor={cardProgress === "Front"? "not-allowed" : "default"}
             >
             <Markdown
                 className={`remark ${cardProgress === "Front"? "remdisabled" : ""}`}
-                remarkPlugins={[gfm]} 
+                remarkPlugins={[gfm]}
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}>
                     {insertHighlightTags(cards[cardCounter].Back)}
             </Markdown>

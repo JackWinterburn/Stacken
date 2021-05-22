@@ -64,6 +64,20 @@ func CreateDeck(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdDeck)
 }
 
+func UpdateDeck(w http.ResponseWriter, r *http.Request) {
+	var deck models.Deck
+	var updatedDeck models.Deck
+
+	err := json.NewDecoder(r.Body).Decode(&updatedDeck)
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	database.First(&deck, updatedDeck.ID)
+	deck.Title = updatedDeck.Title
+	database.Save(&deck)
+}
+
 func DeleteDeck(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
