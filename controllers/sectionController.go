@@ -48,6 +48,20 @@ func CreateSection(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdSection)
 }
 
+func UpdateSection(w http.ResponseWriter, r *http.Request) {
+	var section models.Section
+	var updatedSection models.Section
+
+	err := json.NewDecoder(r.Body).Decode(&updatedSection)
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	database.First(&section, updatedSection.ID)
+	section.Title = updatedSection.Title
+	database.Save(&section)
+}
+
 func DeleteSection(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 

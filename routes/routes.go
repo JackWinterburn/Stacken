@@ -23,6 +23,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/create/section", controllers.CreateSection).Methods("POST")
 	r.HandleFunc("/get/sections/{id}", controllers.GetSections).Methods("GET")
 	r.HandleFunc("/get/section/{id}", controllers.GetSection).Methods("GET")
+	r.HandleFunc("/update/section", controllers.UpdateSection).Methods("POST")
 	r.HandleFunc("/delete/section/{id}", controllers.DeleteSection).Methods("POST")
 
 	// Deck Routes

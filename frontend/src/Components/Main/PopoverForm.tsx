@@ -61,14 +61,14 @@ function PopoverForm({entity, parentID}: {entity: "section" | "deck", parentID: 
 
     return (
         <div>
-            <Popover initialFocusRef={initialFocusRef} placement="left">
+            <Popover initialFocusRef={initialFocusRef} >
             {({onClose}) => (
             <>
             <PopoverTrigger>
             <IconButton icon={<EditIcon />} aria-label={`Add ${entity}`} float="right" mt="4rem" />
             </PopoverTrigger>
 
-            <PopoverContent>
+            <PopoverContent >
             <PopoverArrow />
             <PopoverBody>
                 <form onSubmit={onSubmit}>

@@ -3,7 +3,7 @@ type jsonQuery = {
     SectionID?:      number;
     DeckID   ?:      number;
     ID       ?:      number;
-    title    ?:      string;
+    Title    ?:      string;
     Front    ?:      string;
     Back     ?:      string;
 }
