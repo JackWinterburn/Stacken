@@ -56,7 +56,7 @@ function CardsView() {
         </Breadcrumb>
         </Tag>
         </Flex>
-        <Box as="main" p={8} mt="6" maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
+        <Box as="main" p={8} mt="6" maxWidth="500px" borderWidth={1} borderRadius={3} boxShadow="md">
             <Box>
             <Heading mb="3">
                 {deckTitle}

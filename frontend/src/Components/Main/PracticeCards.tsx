@@ -106,7 +106,7 @@ function PracticeCards() {
         </Breadcrumb>
         </Tag>
         </Flex>
-        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="center">
+        <Box mt="6" p="3" borderWidth="thin" borderRadius={3} boxShadow="lg"  textAlign="center">
         {dataFetched? <Heading>There are no cards in this deck yet...</Heading> : <Spinner />}            
         </Box>
         </Container>
@@ -137,15 +137,15 @@ function PracticeCards() {
         </Flex>
 
         {deckCompleted?
-        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg" >
+        <Box mt="6" p="3" borderWidth="thin" borderRadius={3} boxShadow="lg" >
             <Heading>You have finished the deck!</Heading>
             <Link to={`/${sectionTitle}/${sectionID}`} className="mlink"> Back to sections page.</Link>
         </Box> 
         :         
-        <Box mt="6" p="3" borderWidth="thin" borderRadius="lg" boxShadow="lg"  textAlign="left">
+        <Box mt="6" p="3" borderWidth="thin" borderRadius={3} boxShadow="lg"  textAlign="left">
         <Text>{`${cardCounter+1} / ${cards.length}`}</Text>
         <VStack h="19em" overflow="scroll">
-        <Box id="front" textAlign="left" p="25px" >
+        <Box id="front" textAlign="left" p="25px" width="100%" >
             <Markdown
                 className="remark"
                 remarkPlugins={[gfm]}
@@ -158,8 +158,9 @@ function PracticeCards() {
         <Box 
             id="back" 
             textAlign="left" 
-            p="25px" 
-            filter={cardProgress === "Front"? "blur(5px)" : "blur(0)"}
+            p="25px"
+            width="100%"
+            filter={cardProgress === "Front"? "blur(10px)" : "blur(0)"}
             cursor={cardProgress === "Front"? "not-allowed" : "default"}
             >
             <Markdown
