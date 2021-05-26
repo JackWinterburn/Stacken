@@ -7,5 +7,6 @@ type Deck struct {
 
 	Title     string
 	SectionID int
+	Color     string
 	Cards     []Card
 }

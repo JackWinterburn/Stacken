@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"sort"
 
 	"github.com/JackWinterburn/stacken/db"
 	"github.com/JackWinterburn/stacken/models"
@@ -127,6 +128,8 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	database.First(&user, params["id"])
 	database.Model(&user).Related(&sections)
 
+	// sorting sections by date created
+	sort.Slice(sections, func(i, j int) bool {return sections[i].CreatedAt.Before(sections[j].CreatedAt)})
 	user.Sections = sections
 
 	json.NewEncoder(w).Encode(&user)

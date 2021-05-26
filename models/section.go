@@ -7,5 +7,6 @@ type Section struct {
 
 	Title  string
 	UserID int
+	Color  string
 	Decks  []Deck
 }

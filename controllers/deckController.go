@@ -75,6 +75,7 @@ func UpdateDeck(w http.ResponseWriter, r *http.Request) {
 
 	database.First(&deck, updatedDeck.ID)
 	deck.Title = updatedDeck.Title
+	deck.Color = updatedDeck.Color
 	database.Save(&deck)
 }
 

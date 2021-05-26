@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"net/http"
 
 	"github.com/JackWinterburn/stacken/models"
@@ -18,6 +19,7 @@ func GetSections(w http.ResponseWriter, r *http.Request) {
 	database.First(&user, params["id"])
 	database.Model(&user).Related(&sections)
 
+
 	user.Sections = sections
 
 	json.NewEncoder(w).Encode(&user.Sections)
@@ -31,6 +33,8 @@ func GetSection(w http.ResponseWriter, r *http.Request) {
 
 	database.First(&section, params["id"]).Related(&decks)
 
+	// sorting decks by date created
+	sort.Slice(decks, func(i, j int) bool {return decks[i].CreatedAt.Before(decks[j].CreatedAt)})
 	section.Decks = decks
 
 	json.NewEncoder(w).Encode(section)
@@ -59,6 +63,7 @@ func UpdateSection(w http.ResponseWriter, r *http.Request) {
 
 	database.First(&section, updatedSection.ID)
 	section.Title = updatedSection.Title
+	section.Color = updatedSection.Color
 	database.Save(&section)
 }
 
