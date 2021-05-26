@@ -5,6 +5,7 @@ type jsonQuery = {
     title    ?:      string;
     Front    ?:      string;
     Back     ?:      string;
+    Color    ?:      string;
 }
 
 export async function postEntity(entity: "section" | "deck" | "card", requestedCreationData: jsonQuery) {

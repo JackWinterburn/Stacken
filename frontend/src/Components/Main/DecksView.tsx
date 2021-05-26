@@ -27,7 +27,7 @@ import {
     Spinner,
     useDisclosure
 } from "@chakra-ui/react"
-import { SettingsIcon } from "@chakra-ui/icons"
+import { SettingsIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { useParams, Link } from "react-router-dom"
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux"
 import { alterDecks, resetDecks } from "../../actions"
@@ -35,6 +35,7 @@ import { getEntity } from "../../api/getEntity"
 import { deleteEntity } from "../../api/deleteEntity"
 import { putEntity } from "../../api/putEntity"
 import { getUUID } from "./getUUID"
+import { colors as cardColors } from "./colors"
 
 import "../../Scss/BreadcrumbLinks.scss"
 
@@ -43,7 +44,10 @@ function DecksView() {
     const decks = useSelector((state: RootStateOrAny) => state.decks)
     const dispatch = useDispatch()
     const [editingDeck, setEditingDeck] = useState<Deck>()
-    const [editedDeck, setEditedDeck] = useState<string>("")
+    const [editedDeckTitle, setEditedDeckTitle] = useState("")
+    const [editedDeckColor, setEditedDeckColor] = useState("")
+    const [colorName, setColorName] = useState("")
+    const [colors,] = useState(cardColors)
     const initialRef = useRef<any>()
     let { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -69,23 +73,36 @@ function DecksView() {
     }
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setEditedDeck(e.target.value)
+        setEditedDeckTitle(e.target.value)
     }
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         try {
-            await putEntity("deck", {...editingDeck, Title: editedDeck})
+            await putEntity("deck", {...editingDeck, Title: editedDeckTitle, Color: editedDeckColor})
         } catch(e) {}
         await getEntity("section", sectionID).then((resp) => dispatch(alterDecks(resp.Decks)))
+        setEditedDeckColor("")
+        setColorName("")
         onClose()
     }
 
     function onModalOpen(deck: Deck) {
         setEditingDeck(deck)
-        setEditedDeck(deck.Title)
+        setEditedDeckTitle(deck.Title)
         onOpen()
     }
+
+    function getColor(color: string | null) {
+        if(color === "" || color === null) return "transparent"
+        else return color
+    }
+
+    function onColorChange(color: string, name: string) {
+        setEditedDeckColor(color)
+        setColorName(name)
+    }
+
 
     if (decks[0] && decks[0].CreatedAt === "DEFAULT") {
         // TODO: extract this useless piece of crap into its own component pls :)
@@ -142,6 +159,7 @@ function DecksView() {
             <Box
                 p="3px"
                 borderRadius="sm"
+                borderLeft={`3px solid ${getColor(deck.Color)}`}
                 _hover={{ textDecor: "underline" }}
                 >
             <Text>{deck.Title}</Text>
@@ -175,7 +193,20 @@ function DecksView() {
                 <ModalCloseButton />
                 <ModalBody >
                     <form action="" onSubmit={onSubmit}>
-                    <Input ref={initialRef} value={editedDeck} onChange={onChange} />
+                    <Input ref={initialRef} value={editedDeckTitle} onChange={onChange} />
+
+                    <Menu>
+                    <MenuButton size="sm" mt={5} as={Button} rightIcon={<ChevronDownIcon />}>{colorName || "Change color"}</MenuButton>
+                        <MenuList >
+                            {colors.map((color, idx) => (
+                                <MenuItem key={idx} onClick={() => onColorChange(color.color, color.name)}>
+                                <Box mr="2" w="25px" h="25px" borderRadius="50%" bgColor={color.color}></Box>
+                                <span>{color.name}</span>
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </Menu>
+
                     <Button ml={2} mt={5} float="right" type="submit" colorScheme="red" size="sm" onClick={onClose}>Cancel</Button>
                     <Button mt={5} float="right" type="submit" colorScheme="green" size="sm">Save</Button>
                     </form>
