@@ -1,7 +1,7 @@
 import { RegistrationUserInfo } from "../types";
 
 export async function register(userInfo: RegistrationUserInfo) {
-    const response = await fetch("http://localhost:8080/register", {
+    const response = await fetch("http://192.168.0.31:8080/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

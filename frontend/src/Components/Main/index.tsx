@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux"
 import { alterSections } from "../../actions"
 import { HandleNotLoggedIn } from "./handleNotLoggedIn"
@@ -13,12 +13,13 @@ import {
 
 function Main() {
     const dispatch = useDispatch()
+    const [dataFetched, setDataFetched] = useState(false)
 
     useEffect(() => {
         // the user's sections are held within the user model
         // only do this if there is a UUID in cookie storage
         if(getUUID()){
-            getEntity("user", getUUID()).then((resp) => dispatch(alterSections(resp.Sections)))
+            getEntity("user", getUUID()).then((resp) => {dispatch(alterSections(resp.Sections)); setDataFetched(true)})
         }
     })
     
@@ -28,7 +29,7 @@ function Main() {
             {HandleNotLoggedIn()}
             <Container textAlign="center">
 
-            <SectionsView />
+            <SectionsView dataFetched={dataFetched}/>
             </Container>
 
         </div>

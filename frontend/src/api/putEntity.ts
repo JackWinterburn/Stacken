@@ -16,7 +16,7 @@ type jsonQuery = {
 }
 
 export async function putEntity(entity: "user" | "section" | "deck" | "card", requestedCreationData: any) {
-    const response = await fetch(`http://localhost:8080/update/${entity}`, {
+    const response = await fetch(`http://192.168.0.31:8080/update/${entity}`, {
         method: "Post",
         headers: {
             "Content-Type": "application/json"

@@ -57,6 +57,7 @@ export type RegistrationSuccessMessage = {
 
 export type Section = {
     ID:        number;
+    Color:     string;
     // TODO: Create a dedicated date type
     CreatedAt: string;
     UpdatedAt: string;
@@ -68,6 +69,7 @@ export type Section = {
 
 export type Deck = {
     ID:        number;
+    Color:     string;
     CreatedAt: string;
     UpdatedAt: string;
     DeletedAt: string | null;
