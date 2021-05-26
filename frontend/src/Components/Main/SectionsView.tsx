@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import PopoverForm from "./PopoverForm"
 import { Section } from "../../types"
 import { deleteEntity } from "../../api/deleteEntity"
@@ -23,6 +23,8 @@ import {
     ModalCloseButton,
     Input,
     Button,
+    Heading,
+    Spinner,
     useDisclosure
 } from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
@@ -34,11 +36,12 @@ import { Link } from "react-router-dom"
 
 import "../../Scss/SectionsView.scss"
 
-export function SectionsView() {
+export function SectionsView({dataFetched}: {dataFetched: boolean}) {
     const sections = useSelector((state: RootStateOrAny) => state.sections)
     const dispatch = useDispatch()
     const [editingSection, setEditingSection] = useState<Section>()
     const [editedSection, setEditedSection] = useState<string>("")
+    // const [dataFetched, setDataFetched] = useState(false)
     const initialRef = React.useRef<any>()
     let { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -78,6 +81,14 @@ export function SectionsView() {
           </Breadcrumb>
           </Tag>
 
+        {!dataFetched ? 
+        <Flex direction="row" alignItems="center" justifyContent="center">
+            <Spinner/>
+        </Flex> 
+        :
+        <Box>
+          {sections[0] === undefined ? <Heading size="lg">No sections yet.</Heading> : 
+            <Box maxHeight="60vh" overflowY="scroll">
             {sections.map((section: Section) => (
             <Flex direction="row" justifyContent="space-between" key={section.ID}>
             <Link to={`/${section.Title}/${section.ID}`}>
@@ -111,7 +122,11 @@ export function SectionsView() {
                 </MenuList>
             </Menu>
             </Flex>
-        ))}
+        ))
+        }
+        </Box>}
+        <PopoverForm entity="section" parentID={getUUID()} />
+        </Box>}
 
     <Modal size="sm" isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
         <ModalOverlay />
@@ -128,7 +143,6 @@ export function SectionsView() {
         </ModalContent>
         </Modal>
 
-        <PopoverForm entity="section" parentID={getUUID()} />
         </Flex>
     )
 }

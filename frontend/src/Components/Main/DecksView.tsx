@@ -4,15 +4,14 @@ import { useEffect } from "react"
 import { Deck } from "../../types"
 import { 
     Container,
+    Heading,
     Flex,
     Box,
     Text,
-    Stack,
     Tag,
     Breadcrumb,
     BreadcrumbItem,
     IconButton,
-    Skeleton,
     Menu,
     MenuButton,
     MenuList,
@@ -25,6 +24,7 @@ import {
     ModalCloseButton,
     Input,
     Button,
+    Spinner,
     useDisclosure
 } from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
@@ -106,11 +106,9 @@ function DecksView() {
             </BreadcrumbItem>
         </Breadcrumb>
         </Tag>
-        <Stack>
-        <Skeleton height="20px"></Skeleton>
-        <Skeleton height="20px"></Skeleton>
-        <Skeleton height="20px"></Skeleton>
-        </Stack>
+        <Flex justifyContent="center" alignItems="center">
+        <Spinner/>
+        </Flex>
         </Flex>
         </Container>
     )}  else {
@@ -132,14 +130,20 @@ function DecksView() {
             </Breadcrumb>
             </Tag>
 
+            {decks[0] === undefined ? 
+            <Heading>No decks yet.</Heading>
+            :
+            <Box>
+                
+
             {decks.map((deck: Deck) => (
-            <Flex direction="row" justifyContent="space-between" key={deck.ID}>
+                <Flex direction="row" justifyContent="space-between" key={deck.ID}>
             <Link to={`/${sectionTitle}/${sectionID}/${deck.Title}/${deck.ID}`}>
             <Box
                 p="3px"
                 borderRadius="sm"
                 _hover={{ textDecor: "underline" }}
-            >
+                >
             <Text>{deck.Title}</Text>
             </Box>
             </Link>
@@ -150,7 +154,7 @@ function DecksView() {
                     icon={<SettingsIcon />}
                     variant="ghost"
                     size="sm"
-                ></MenuButton>
+                    ></MenuButton>
 
                 <MenuList>
                 <MenuItem onClick={() => onModalOpen(deck)}>
@@ -162,7 +166,7 @@ function DecksView() {
                 </MenuList>
             </Menu>
             </Flex>
-            ))}
+            ))}</Box>}
 
             <Modal size="sm" isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
                 <ModalOverlay />
